@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <style>
+        button {
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgb(233, 194, 122);
+        }
+        .foods {
+            display: none;
+        }
+        .drinks {
+            display : none;
+        }
+        .active {
+            display: block;
+        }
+        .food img {
+            float: left;
+            padding : 10px;
+            width : 200px;
+            height: 150px;
+        }
+        .food {
+            display :flexbox;
+        }
+        .food p {
+            clear:both;
+        }
+        .drink img {
+            float: right;
+            padding : 10px;
+            width : 200px;
+            height: 150px;
+        }
+        .drink {
+            display: flexbox;
+        }
+        .drink p {
+            clear: both;
+            text-align: right;
+        }
+        .addBtn {
+            display: inline-block;
+            padding : 10px;
+            margin-left: 30px;
+            width : 80px;
+            height : 30px;
+            text-align: center;
+        }
+
+    </style>
+
+    <div style="max-width : 700px; margin: auto; padding : 0 15px; ">
+        <br>
+        <h3 class="padding-48 text-center">
+            <span class="bg-black" >카페 메뉴</span>        
+        </h3>
+        <div class="menu">
+            <div class="menu-btn-group float-container">
+                <button id="foodBtn" class="left width-50 text-center" onclick="showFood()">음식</button>
+                <button id="drinkBtn" class="left width-50 text-center" onclick="showDrink()">음료</button>
+            </div>
+    </div>
+
+        <div id="foodMenu" class="foods" style="padding : 48px 10px;">
+            <div class="food">
+                <img src="../portfolio/img/food01.jpg" alt="">
+                <p>이름 : 초코케이크 <br> 가격 : 조각당 3000원 <br> 설명 : 상큼한 딸기와 달콤묵직한 초코크림이 환상적인 초코케이크</p>
+            </div>
+            <div class="food">
+                <img src="../portfolio/img/food02.jpg" alt="">
+                <p>이름 : 미니 컵케이크 <br> 가격 : 개당 1500원 <br> 설명 : 부드러운 컵케이크 안에 과일과 크림이 가득찬 달콤한 머핀</p>
+            </div>
+            <div class="food">
+                <img src="../portfolio/img/food03.jpg" alt="">
+                <p>이름 : 진저쿠키 <br> 가격 : 개당 1000원 <br> 설명 : 생강향이 감도는 달콤한 과자에 아이싱으로 귀여운 옷을 입힌 진저쿠키</p>
+            </div>
+            <div class="food">
+                <img src="../portfolio/img/food04.jpg" alt="">
+                <p>이름 : 초코칩쿠키 <br> 가격 : 개당 1000원 <br> 설명 : 모두가 아는 바로 그 맛. 초코칩이 콕콕 박힌 쿠키.</p>
+            </div>          
+        </div>
+
+        <div id="drinkMenu" class="drinks" style="padding : 48px 10px;">
+            <div class="drink">
+                <img src="../portfolio/img/drink01.jpg" alt="">
+                <p>이름 : 아메리카노 (hot/ice) <br> 가격 : 3500원 <br> 설명 : 모든 디저트와 잘어울리는 베이직 커피</p>
+            </div>
+            <div class="drink">
+                <img src="../portfolio/img/drink02.jpg" alt="">
+                <p>이름 : 카페라떼 (hot/ice) <br> 가격 : 4500원 <br> 설명 : 커피향과 부드러운 맛까지 포기할 수 없다면 이걸로</p>
+            </div>
+            <div class="drink">
+                <img src="../portfolio/img/drink03.jpg" alt="">
+                <p>이름 : 콜라 <br> 가격 : 1000원 <br> 설명 : 느끼할 땐 역시 탄산이지. 당연히 저희는 빨간 콜라만 취급합니다.</p>
+            </div>
+            <div class="drink">
+                <img src="../portfolio/img/drink04.jpg" alt="">
+                <p>이름 : 생과일주스 (딸기, 레몬, 오렌지, 키위) <br> 가격 : 4000원 <br> 설명 : 엄선하여 고른 신선한 과일을 바로 갈아드립니다.</p>
+            </div>
+    </div>
+
+    <div style="max-width : 700px; margin: auto; padding : 0 15px; ">
+        <br>
+        <h3 class="padding-48 text-center">
+            <span class="bg-black" >카페 장바구니</span>        
+        </h3>
+        <div id="root"></div>
+        <button onclick="showCart()"> My Cart </button>
+        <button onclick="deleteCart()"> Delete </button>
+
+<div id="result"></div>
+    </div>
+
+    <div style="max-width : 700px; margin: auto; padding : 0 15px; ">
+        <br>
+        <h3 class="padding-48 text-center">
+            <span class="bg-black" >카페 예약</span>        
+        </h3>
+        <form action="">
+            <div class="form-group">
+                <label for=""></label>
+                <input type="text" class="width-100" placeholder="이름">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="text" class="width-100" placeholder="전화번호">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="number" class="width-100"  placeholder="인원">
+            </div>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="number" class="width-100"  placeholder="동반 펫">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="date" class="width-100"  placeholder=" "> 
+            </div>
+            <br>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="text" class="width-100"  placeholder="메세지 / 요청사항">
+            </div>
+            <br>
+            <div class="form-group">
+                <button class="bg-black" style="padding : 15px;">메세지 보내기</button>              
+            </div>
+        </form>
+    </div>
+
+
+
+    <script>
+        var foodBtn=document.getElementById("foodBtn");
+        var drinkBtn=document.getElementById("drinkBtn");
+        var foodMenu = document.getElementById("foodMenu");
+        var drinkMenu = document.getElementById("drinkMenu")
+
+        function showFood() {
+            foodMenu.classList.toggle("active")
+        }
+        function showDrink() {
+            drinkMenu.classList.toggle("active")
+        }
+
+        var DATA = [
+        {id:1, name : '초코케이크', cost : 3000},
+        {id:2, name : '미니컵케이크', cost : 1500},
+        {id:3, name : '진저쿠키', cost : 1000},
+        {id:4, name : '초코칩쿠키', cost : 1000},
+        {id:5, name : '아메리카노', cost : 3500},
+        {id:6, name : '카페라떼', cost : 4500},
+        {id:6, name : '콜라', cost : 1000},
+        {id:6, name : '생과일주스', cost : 4000},
+    ];
+    var ul = document.createElement('ul')
+
+    DATA.map(function(item){
+        var li = document.createElement('li');
+        li.innerHTML=`${item.name}, $${item.cost} <button class="addBtn" onclick="addToCart(${item.id})">addCart</button>`
+        ul.appendChild(li)
+    })
+
+    document.getElementById('root').appendChild(ul)
+
+    function addToCart(id) {
+        console.log(id)
+
+        if(localStorage.getItem('cart')===null){        
+            localStorage.setItem('cart','[]')
+        }
+
+        var cart = JSON.parse(localStorage.getItem('cart'));
+
+        var isCart=false; 
+    
+        
+        cart.map(function (item){
+            if(item.id===id) {
+                item.quantity++;
+                isCart=true;
+                alert('장바구니에 상품이 추가되었습니다.')
+            }
+        })
+    
+    
+        if(isCart===false) {            
+            DATA.map(function (data){
+                if(data.id == id){
+                    cart.push({id:data.id, quantity:1});
+                    alert('장바구니에 상품이 추가되었습니다.')
+                }
+            })
+        }
+        localStorage.setItem('cart',JSON.stringify(cart));
+    }
+
+    function showCart() {
+        var cart = JSON.parse(localStorage.getItem('cart'));
+
+        var ul = document.createElement('ul');
+
+        DATA.map(function(data){ //데이터 중에서 (데이터의 수만큼 반복)
+            cart.map(function(item){ // 내 카트에 있는 것만 가져오기 (카트의 수만큼 반복)
+                if(data.id===item.id){
+                    console.log(item)
+
+                    var li = document.createElement('li')
+                    li.innerHTML = `상품명 : ${data.name}, 수량 : ${item.quantity}, 가격 : ${data.cost* item.quantity}`
+                    ul.appendChild(li)
+
+                }
+            })
+        })
+        document.getElementById('result').replaceChildren(ul);
+    }
+
+    function deleteCart(event) {
+        if(event.target.checked) {
+        }
+    }
+
+    </script>
+    
+</body>
+</html>

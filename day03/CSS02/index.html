@@ -1,0 +1,686 @@
+
+<!-- <style>
+    li {
+        font-size : 24px;
+    }
+
+    div,p,span,small{
+        border : 1px dashed;
+    }
+</style> -->
+
+<!-- <h1>Display 속성</h1>
+
+<ul>
+    <li>display : block</li>
+    <li>display : inline</li>
+    <li>display : inline-block</li>
+    <li>display : none</li>
+</ul> -->
+
+<!-- display : block -->
+<!-- <div>divide</div>
+<p>paragraph</p> -->
+
+<!-- <style>
+    span, small,button {
+        padding : 10px;
+        margin : 10px;
+    }
+</style> -->
+
+<!-- <hr> -->
+<!-- display : inline -->
+<!-- <span>span1</span>
+<span>span2</span>
+<small>small1</small> -->
+
+<!-- display : inline-block -->
+<!-- <button>button</button> -->
+
+<!-- <style>
+    nav{
+        background-color: #ddd;
+    }
+
+    nav a {
+        padding : 10px;
+        display : inline-block;
+        /* display : inline; << 이게 기본값 */
+        /* display : block; */
+    }
+</style>
+
+<nav>
+    <!-- anchor 태그는 display : inline -->
+    <!-- <a href="">홈</a>
+    <a href="">About</a>
+    <a href="">상품소개</a>
+
+</nav> --> 
+
+<!-- *최종 정리
+
+* inline
+span, a , small
+
+* inline-block
+button , input
+
+* block
+div, p , form , nav , header , footer -->
+
+<!-- <style>
+    button{
+        padding : 10px;
+        border : none;
+        background-color: #ddd;
+    }
+    a:active {
+        color : green;
+    }
+    a:visited {
+        color : red;
+    }
+
+    /* * Presdo-class는 :hover */
+    button:hover {
+        background-color: #888;
+    }
+
+    p:first-child {
+        color : blue;
+    }
+
+
+</style>
+
+<h1>Pseudo-class (가짜 클래스)</h1>
+
+<button>저장</button>
+<br>
+<a href="">Google</a>
+<div>
+    
+    <p>paragraph 1</p>
+    <p>paragraph 2</p>
+
+</div> -->
+
+<!-- <h1>CSS [속성] 선택자</h1>
+
+<style>
+    input[type=text] {
+        border : 3px solid green;
+        padding : 5px;
+    }
+
+    input[type=number] {
+        border : 3px solid gray;
+        padding : 5px;
+    }
+    a[target = _black] {
+        color : green;
+    }
+    button[type = submit] {
+        border : none;
+    }
+
+
+</style>
+
+<input type="text">
+<input type="number">
+
+<hr>
+
+<a href="">Google</a>
+<a href="" target = "_black">Naver</a>
+
+<button type = "submit">저장</button>
+<button>취소</button> -->
+
+<!-- <h1>!important</h1>
+
+<style>
+    p {
+        color : red!important;
+    }
+    p {
+        color : green!important;
+    }
+    p {
+        color : orange;
+    }
+
+</style>
+
+<p style = "color : blue">paragraph 1</p> -->
+
+<!-- <style>
+    div {
+        width : 100px;
+        height : 100px;
+        border : 1px solid;
+        /* float은 원래 기본값이 none;
+        float : left; */
+    }
+    .left {
+        float : left;
+    }
+
+    .right {
+        float : right;
+    }
+
+</style>
+
+<h1>Float (떠있다)</h1>
+
+<div class=" none"></div>
+<div class=" left"></div>
+<div class=" right"></div> -->
+
+
+<!-- <style>
+    nav{
+        border : 1px dashed;
+        overflow : hidden;
+
+    }
+    
+    nav a {
+        padding : 10px;
+        float : left;
+        display : inline;
+    }
+
+</style>
+
+<nav>
+    <a href="">Home</a>
+    <a href="">About</a>
+    <a href="">Blog</a>
+
+</nav> -->
+
+<!-- <h1>Position 속성</h1>
+
+<ol>
+    <li>position : static , 기본값</li>
+    <li>position : relative , 원래 위치에서 상대적이다</li>
+    <li>position : fixed , 뷰포트를 기준으로 위치한다</li>
+    <li>position : absolute , 가까운 조상에 상대적이다</li>
+    <li>position : sticky , 스크롤 포지션에 따라 위치한다</li>
+
+</ol>
+
+<style>
+    div {
+        border : 1px solid;
+        width : 100px;
+        height : 100px;
+    }
+    .static {
+        position : static;
+    }
+    .relative1 {
+        position : relative;
+        left : 50px;
+    }
+    .relative2 {
+        position: relative;
+
+    }
+    .relative2 p {
+        border : 1px solid red;
+        position : absolute;
+        top : 10px; left : 0;
+        margin : 0
+    }
+    .fixed {
+        position : fixed;
+        top : 0; left : 0;
+        width : 100%;
+        background-color: #888;
+
+    }
+
+</style>
+
+<div class="static">static</div>
+<div class="relative1">relative 1</div>
+<div class="relative2">
+    <p>paragraph</p>
+</div>
+<div class="fixed">fixed</div> -->
+
+<!-- <h1>z-index 속성</h1>
+
+<style>
+    .container{
+        position : relative;
+        border : 1px dashed;
+
+    }
+
+    .black-box{
+        position : absolute;
+        background-color: #333;
+        color : #fff;
+        width : 100px;
+        height : 100px;
+        left : 10 ; top : 0;
+        z-index : 1;
+    }
+
+    .green-box {
+        position : absolute;
+        background-color: green;
+        color : #fff;
+        width : 50px;
+        height : 50px;
+        left : 0; top : 0;
+    }
+
+ 
+
+
+</style>
+
+<div class="container">
+    <div class="black-box">Black</div>
+    <div class="green-box">Green</div>
+</div> -->
+
+<!-- <h1>Overflow 속성</h1>
+
+<dl>
+    <dt>overflow : visible</dt>
+    <dd>기본값. 넘치는 부분을 보여준다</dd>
+
+    <dt>overflow : hidden</dt>
+    <dd>넘치는 부분을 가린다</dd>
+
+    <dt>overflow : scroll</dt>
+    <dd>넘치는 부분을 스크롤로 처리한다. 가로 세로 모두</dd>
+
+    <dt>overflow : auto</dt>
+    <dd>가로 세로 중 넘치는 부분만 스크롤로 처리한다.</dd>
+</dl>
+
+<style>
+    div {
+        height : 50px;
+        background-color: #ddd;
+
+    }
+    .visible {
+        overflow : visible;
+
+    }
+    .hidden {
+        overflow : hidden;
+    }
+    .scroll {
+        overflow : scroll;
+    }
+
+    .auto {
+        overflow : auto;
+    }
+
+</style>
+
+
+<div class="visible">
+    Lorem ipsum dolor sit amet consectetur, 
+    adipisicing elit. Ad sed perferendis dolore. Corporis cumque, 
+    facilis fuga ut dicta quam quisquam ad optio velit iusto qui eius 
+    excepturi nostrum nesciunt ea.
+</div>
+
+<div class="hidden">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit, aut nihil eligendi officia soluta quaerat ratione repellat? Necessitatibus vero, rerum odio perferendis, esse officiis saepe illum reprehenderit laboriosam corporis totam.
+</div>
+
+<br><br>
+
+<div class="scroll">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam, accusamus. Aliquam nobis libero mollitia reiciendis aperiam, aspernatur, provident, nulla quam laboriosam nisi cum vitae velit natus dolor maxime ipsam tempore.
+
+</div>
+
+<br>
+
+<div class="auto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit accusantium dignissimos, temporibus magnam perferendis omnis nostrum sapiente, quaerat laudantium vero at corrupti placeat iure, excepturi enim quos rem quasi atque.
+
+</div> -->
+
+<!-- <style>
+    input, select,button {
+        width : 100%;
+        padding : 10px;
+    }
+
+    .form-group {
+        margin-top: 10px;
+    }
+
+    button {
+        cursor : pointer;
+        background-color : #4CAF50;
+        color : #fff;
+        border : none;
+        border-radius: 4px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+</style>
+
+<form action="" method = "post">
+
+    <div class="form-group">
+        <label for="">First Name</label>
+        <input type="text" name = "fname" placeholder="Your name..">
+    </div>
+
+    <div class="form-group">
+        <label for="">Last Name</label>
+        <input type="text" name = "lname" placeholder="Your last name..">
+    </div>
+
+    <div class="form-group">
+        <label for="">Country</label>
+        <select name="country" id="">
+            <option value="australia">Australia</option>
+            <option value="canada">Canada</option>
+            <option value="usa">USA</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <button type = "submit">Submit</button>
+    </div>
+
+</form> -->
+
+<!-- <style>
+    .bg-image {
+        /* border : 1px solid; */
+        height : 500px;
+        background-image : url('../img/tulips.jpg');
+        background-size: cover;
+        background-position: center;
+        position : relative;
+    
+    }
+    .bg-text {
+        /* border : 1px dashed red; */
+        position : absolute;
+        top : 50%;
+        left : 50%;
+        transform : translate(-50%, -50%)
+    }
+
+</style>
+
+ <h1>Background Image</h1> -->
+
+<!-- <div class="bg-image">
+    <div class="bg-text">
+        <h1>Heading</h1>
+        <p>paragraph</p>
+    </div>
+</div> --> 
+
+
+<!-- 
+<style>
+    *{
+        margin : 0;
+        padding : 0;
+        box-sizing: border-box;
+    }
+    .row {
+        min-height : 500px;
+        width : 1000px;
+        max-width : 100%;
+        margin : 0 auto;
+    }
+    header{
+        background-color: #ddd;
+        padding : 25px;
+    }
+    footer {
+        background-color: #333;
+        color : white;
+        padding : 25px;
+        text-align: center;
+    }
+
+    nav {
+        /* border : 1px dashed; */
+        float : left;
+        width : 100%;
+    }
+    nav a {
+        display: block;
+        padding : 10px;
+        background-color: dodgerblue;
+        color : white;
+    }
+    .main {
+        /* border : 1px dashed; */
+        float : left;
+        width : 100%;
+        padding : 15px;
+    }
+
+    /* clearfix */
+    .row::after{
+        content : "";
+        display : block;
+        clear : left;
+        /* clear : both; */
+    }
+
+    @media (min-width : 601px) {
+        nav {
+            width : 25%;
+        }
+        .main {
+            width : 75%;
+        }
+    }
+
+</style>
+
+<header>
+    <h1>현대자동차</h1>
+</header>
+
+<div class="row">
+    <nav>
+        <a href="">제네시스</a>
+        <a href="">아반떼</a>
+        <a href="">캐스퍼</a>
+    </nav>
+    <div class="main">
+        <h2>캐스퍼</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio laborum voluptates animi debitis sit ipsa dolor accusamus ratione iste. Iusto ea labore magni esse alias quidem architecto harum, blanditiis aliquid!</p>
+    </div>
+</div>
+
+<footer>
+    <small>2022 현대자동차</small>
+</footer> -->
+
+<!-- <style>
+    *{
+        padding : 0;
+        margin : 0;
+        box-sizing : border-box;
+    }
+
+
+    div {
+        width : 100px;
+        height : 100px;
+        border : 1px dashed;
+        padding : 50px;
+    }
+    .content-box {
+        box-sizing : content-box;
+    }
+    .border-box {
+        box-sizing : border-box;
+    }
+</style>
+
+<div style = "padding : 0"></div>
+
+<div class="content-box"></div>
+
+<div class="border-box"></div> -->
+
+
+<!-- 
+<style>
+    .bg-image{
+        height : 500px;
+        margin : 5px;
+        background-image: url('../img/tulips.jpg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    .top-left p{
+        margin : 10px;
+        padding : 5px;
+        position : absolute;
+        top : 0%;
+        left : 0%;
+        
+    }
+    .top-right p{
+        margin : 10px;
+        padding : 5px;
+        position : absolute;
+        top : 0%;
+        right : 0%;
+    }
+    .center p{
+        position : absolute;
+        top : 50%;
+        left : 50%;
+    }
+    .bottom-left p{
+        margin : 10px;
+        padding : 5px;
+        position: absolute;
+        bottom : 0%;
+        left : 0%;
+    }
+    .bottom-right p{
+        margin : 10px;
+        padding : 5px;
+        position : absolute;
+        bottom : 0%;
+        right : 0%;
+    }
+    
+    </style>
+
+<h1>Image Text</h1>
+<p>How to place text over an image : </p>
+
+<div class="bg-image">
+    <div class="top-left">
+        <p>Top Left</p>
+    </div>
+    <div class="top-right">
+        <p>Top Right</p>
+    </div>
+    <div class="center">
+        <p>Centered</p>
+    </div>
+    <div class="bottom-left">
+        <p>Bottom Left</p>
+    </div>
+    <div class="bottom-right">
+        <p>Bottom Right</p>
+    </div>
+</div> -->
+
+<!-- <style>
+    .hero-image {
+        background-image: url('../img/tulips.jpg');
+        background-size: cover;
+        height : 500px;
+        background-position: center;
+        position : relative;
+    }
+
+    .hero-text {
+        position : absolute;
+        color : white;
+    }
+    .top-left{
+        top : 0; left : 0;
+    }
+    .top-right{
+        top : 0; right : 0;
+    }
+    .center {
+        top : 50%;
+        left : 50%;
+        transform: translate(-50%, -50%);
+        /* transform : translateX(),translateY()
+        >> 이렇게 주어도 됨 */
+
+    }
+    .bottom-left {
+        bottom : 0; left : 0;
+    }
+    .bottom-right {
+        bottom : 0; right : 0;
+    }
+</style>
+
+
+<div class="hero-image">
+    <span class = "hero-text top-left">top left</span>
+    <span class = "hero-text top-right">top right</span>
+    <span class = "hero-text center">center</span>
+    <span class = "hero-text bottom-left">bottom left</span>
+    <span class = "hero-text bottom-right">bottom right</span>
+</div> -->
+
+<style>
+    button {
+        border : none;
+    }
+
+    button:hover {
+        cursor: pointer;
+        background-color: skyblue;
+        border-radius: 1px;
+        color : white;
+    }
+
+</style>
+
+<button>《</button>
+<button>1</button>
+<button>2</button>
+<button>3</button>
+<button>4</button>
+<button>5</button>
+<button>6</button>
+<button>》</button>
+
+
+

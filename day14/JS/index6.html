@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- javascript로 html에 element 추가하기 -->
+
+    <!-- <style>
+        #root {
+            border : 1px dashed;
+        }
+    </style>
+
+    <h1>document.createElement()</h1>
+    <h1>appendChild</h1>
+    <h1>innerHTML</h1>
+
+    <div id="root"></div>
+
+    <script>
+        // document.createElement(element) 새로운 element를 만들어 낸다.
+        var heading1 = document.createElement('h1')
+
+
+        // 만들어진 element에 contents를 만든다.
+        // element.innerHtml='content'
+        heading1.innerHTML='JavaScript...!'
+
+        // element1.appendChild(element2) >>> element2를 element1의 마지막에 추가한다.
+        // 여기에서는 위에 만들어놓은 빈 div의 아이디로 접근해서 그 안에 heading1이라는 element를 넣었다.
+        document.getElementById('root').appendChild(heading1)
+
+        var p = document.createElement('p') //1 create element
+        p.innerHTML='Welcome to JavaScript' // 2 innerHTML로 값 넣어주기
+        document.getElementById('root').appendChild(p) // 3 appendChild로 element 넣기
+
+        console.log(heading1)
+    </script> -->
+
+<!-- ======================================================================================================== -->
+
+    <!-- html 안쓰고 웹화면에 h1, ul, li 나타내기 실습 -->
+    <!-- <div id="root"></div>
+
+    <script>
+        var h1 = document.createElement('h1')
+        h1.innerHTML='현대자동차'
+        document.getElementById('root').appendChild(h1)
+        
+        var ul = document.createElement('ul')
+        var cars = ['제네시스','스타리아','아이오닉','캐스퍼']
+
+        for(car of cars){
+            var li = document.createElement('li');
+            li.innerHTML=car;
+            ul.appendChild(li)
+        }
+
+        document.getElementById('root').appendChild(ul)
+
+    </script> -->
+
+    <!-- <div id="root"></div>
+
+    <script>
+        var h1 = document.createElement('h1');
+        h1.innerHTML='현대자동차 vs 기아자동차';
+
+        document.getElementById('root').appendChild(h1);
+
+        var cars = [
+            { name : '제네시스', brand : '현대'},
+            { name : '레이', brand : '기아'},
+            { name : '아이오닉', brand : '현대'},
+            { name : '카니발', brand : '기아'}            
+        ]
+        
+        var ul = document.createElement('ul');
+
+        cars.forEach(function(car){
+            var li = document.createElement('li')
+            // Object의 property에 접근(객체의 속성에 접근)
+            li.innerHTML=car.name+' , '+car.brand
+            ul.appendChild(li)
+        })
+
+        document.getElementById('root').appendChild(ul)
+
+    </script> -->
+
+<!-- ======================================================================================================== -->
+
+    <!-- <div id="root"></div>
+
+    <script>
+        // 내가 한 것
+        // var table = document.createElement('table')
+        // var tableH = document.createElement('tr')
+        // var tableR1 = document.createElement('tr')
+        // var tableR2 = document.createElement('tr')
+        
+        // var cars = [
+        //     {name : '차종',design : '디자인', cost : '가격'},
+        //     {name:'제네시스', design : 100, cost : 100},
+        //     {name:'스타리아', design : 90, cost : 90},
+        //     {name:'아이오닉', design : 80, cost : 80},
+        //     {name:'캐스퍼', design : 80, cost : 70}
+        // ]
+        
+        // cars.forEach(function(car){            
+            
+        //     var tableH = document.createElement('th');
+        //     tableH.innerHTML=car.name;
+        //     table.appendChild(tableH);
+
+            
+        //     var tableD1 = document.createElement('td')
+        //     tableD1.innerHTML=car.design;
+        //     tableR1.appendChild(tableD1);
+            
+        //     var tableD2 = document.createElement('td')
+        //     tableD2.innerHTML=car.cost;            
+        //     tableR2.appendChild(tableD2);
+            
+        // })
+        // table.appendChild(tableR1);
+        // table.appendChild(tableR2);
+        // document.getElementById('root').appendChild(table)
+        // console.log(table)
+
+        // 강사님 버전
+        // table 틀 만들기
+        var table = document.createElement('table');
+        var tr = document.createElement('tr')
+        var th = ['이름','디자인','가격'];
+
+        // tr에 th 추가하기
+        for (value of th) {
+            var th = document.createElement('th');
+            th.innerHTML=value;
+            tr.appendChild(th)
+        }        
+        
+        // root에 table 추가하기
+        document.getElementById('root').appendChild(table)
+
+        //table에  tr 추가하기
+        table.appendChild(tr);
+
+        var cars = [
+            {name:'제네시스', design : 100, cost : 100},
+            {name:'스타리아', design : 90, cost : 90},
+            {name:'아이오닉', design : 80, cost : 80},
+            {name:'캐스퍼', design : 80, cost : 70}
+        ]
+
+        cars.forEach(function(car){
+            var tr = document.createElement('tr')
+            tr.innerHTML=
+            `
+            <td>${car.name}</td>
+            <td>${car.design}</td>
+            <td>${car.cost}</td>
+            `
+            table.appendChild(tr)
+        })
+
+    </script> -->
+
+    <!-- ======================================================================================================== -->
+
+    <!-- input 값으로 리스트 추가 스크립트 만들기 -->
+    <!-- 추가 실습 >>> 목록 끝에 x표시 만들어서 목록 지우기 -->
+
+
+    <!-- <h1>할 일 목록</h1>
+
+    <div class="">
+        <input type="text"> <button>추가하기</button>
+    </div>
+
+    <ul>
+        <li>먹기 <span onclick="deleteItem(this)">&times;</span> </li>
+        <li>자기 <span onclick="deleteItem(this)">&times;</span> </li>
+        <li>반복하기 <span onclick="deleteItem(this)">&times;</span> </li>
+    </ul>
+
+    
+    <span onclick="deleteItem(this)">&times;</span>
+    <h1 onclick="myFunction(this)">hello</h1> 
+   
+
+    <script>
+
+        // function myFunction(data) {
+        //     console.log(data)
+        // }
+
+        var ul = document.querySelector('ul');
+        var input = document.querySelector('input');
+        var button = document.querySelector('button');
+    
+        button.addEventListener('click', Todo)
+
+        function Todo(){
+            // input에서 받아온 텍스트 콘솔창에 찍어보기
+            console.log(input.value)
+
+            // input 에서 받아온 텍스트를 html에 추가하기
+            var li = document.createElement('li');
+
+                // `${정상출력} html 코드 사용 가능 구역`
+            li.innerHTML=`${input.value} <span onclick="deleteItem(this)">&times;</span>`;
+            ul.appendChild(li)
+
+            //텍스트 추가 후 input 초기화
+            input.value=''
+        }
+
+        function deleteItem(data){
+            // 해당 x버튼(span)이 속해있는 부모테그(li) display none 설정
+            data.parentElement.style.display='none';
+        }
+
+
+    </script> -->
+
+<!-- ======================================================================================================== -->
+
+    <!-- 실습 >> 버튼 누르면 count 올라가는 화면 만들기 -->
+    <!-- 응용 : +, - 버튼으로 값 바꾸기 -->
+
+    <!-- <h1 id = "count"></h1>
+    <button id="plus">+</button>
+    <button id="minus">-</button>
+
+    <script>
+        var count = document.getElementById('count')
+        var plus = document.getElementById('plus')
+        var minus = document.getElementById('minus')
+        
+        
+        // count.innerHTML=num;
+        
+        // 내가 한 것
+        // var num=0;
+        // count.innerHTML=localStorage.getItem('count'); 
+        
+        // btn.addEventListener('click',function(){
+        //     num++; //증가시킨 후
+        //     count.innerHTML=num
+
+        //     localStorage.setItem('count',num)
+        // })
+        
+        //========================================================================
+
+        // 강사님
+        // var num=0;
+       
+        console.log(localStorage.getItem('count'));
+
+        // 페이지 load(refresh) 했을 때
+        if(localStorage.getItem('count')===null){
+            // 나중에 정의해도 됨
+            var num=0;
+        }else{
+            // 나중에 정의해도 됨
+            var num=localStorage.getItem('count')
+        }
+        
+        count.innerHTML=num;
+
+        // 버튼을 클릭했을때
+        plus.addEventListener('click',function(){
+            num++;
+
+            localStorage.setItem('count',num)
+
+            count.innerHTML=num;
+        })
+        minus.addEventListener('click',function(){
+            num--;
+            localStorage.setItem('count',num)
+            count.innerHTML=num;
+        })
+    </script> -->
+
+    <!-- 현재 새로고침을 하면 count는 0으로 초기화. 이걸 막으려면?? storage! -->
+    <!-- <h1>LocalStorage</h1>
+    <h3>
+        HTML5 전까지는 cookie가 유일한 저장소였다.<br>
+        cookie보다 더 안전하고 더 많은 데이터를 저장할 수 있다.<br><br>
+        cookie는 서버에 요청을 할 경우 항상 포함되지만<br>
+        LocalStorage는 선택할 수 있다 <br>
+        (선택에 따라 서버에 보낼수도, 보내지 않을 수도 있음)<br>
+    </h3>
+
+    <h1>SessionStorage</h1>
+    <h3>LocalStorage와 거의 비슷하지만 탭을 끌 경우 삭제된다.<br>
+    브라우저 내의 저장공간이라고 생각하면 된다.<br>
+    온라인 홈페이지의 장바구니, 로그인 같은 거라고 생각하면 된다.</h3>
+
+    <h1>위의 두 storage를 합쳐서 WebStorage라고 한다.</h1> -->
+<!-- ======================================================================== -->
+
+    <!-- storage 안의 데이터 추가,삭제 -->
+
+    <!-- <div id="root"></div>
+    <button onclick="removeItem()">삭제</button>
+    <button onclick="clearItem()">전체 삭제</button>
+
+    <script>
+        // localStorage.setItem('key','value') : key,value를 저장한다
+        localStorage.setItem('car1','제네시스')
+        localStorage.setItem('car2','스타리아')
+        // 위의 문장을 주석처리해도 해당 storage에 남아있음.
+        // 여기서 key값은 중복될 수 없다 (맨 밑의 값으로 입력됨)
+
+        document.getElementById('root').innerHTML=
+        localStorage.getItem('car')
+        //localStorage.getItem('key') : key값을 가져온다.
+
+        function removeItem(){
+            // localStorage.removeItem('key') : key값을 삭제하며 해당하는 value값도 같이 삭제
+            localStorage.removeItem('car')
+        }
+        function clearItem(){
+            localStorage.clear()
+        }
+
+    </script> -->
+<!-- ======================================================================== -->
+
+    <!-- 투표하기 만들기 (self) -->
+
+    <!-- <style>
+        ul {
+            display : none;
+        }
+        .active {
+            display : block;
+        }
+    </style>
+
+    <h1>Voting</h1>
+    <button id="1">1</button>
+    <button id="2">2</button>
+    <button id="3">3</button>
+    <button id="4">4</button>
+    <br>
+    <button id="result">result</button>
+
+    <ul>
+        <li>0</li>
+        <li>0</li>
+        <li>0</li>
+        <li>0</li>
+    </ul>
+
+    <script>
+        var btn1 = document.getElementById('1')
+        var btn2 = document.getElementById('2')
+        var btn3 = document.getElementById('3')
+        var btn4 = document.getElementById('4')
+        var result=document.getElementById('result')
+        var ul = document.querySelector('ul')
+        
+
+
+        var lis = document.querySelectorAll('li')
+
+        if(localStorage.getItem('vote1')===0 && localStorage.getItem('vote2')===0 && 
+        localStorage.getItem('vote3')===0 && localStorage.getItem('vote4')===0) {
+            var vote1 = 0;
+            var vote2 = 0;
+            var vote3 = 0;
+            var vote4 = 0;
+        } else{
+            var vote1=localStorage.getItem('1');
+            var vote2=localStorage.getItem('2');
+            var vote3=localStorage.getItem('3');
+            var vote4=localStorage.getItem('4');
+        }
+
+        btn1.addEventListener('click',function(){
+            vote1++;
+            localStorage.setItem('1',vote1)
+            lis[0].innerHTML=vote1;
+            
+        })
+        btn2.addEventListener('click',function(){
+            vote2++;
+            localStorage.setItem('2',vote2)
+            lis[1].innerHTML=vote2;
+            
+        })
+        btn3.addEventListener('click',function(){
+            vote3++;
+            localStorage.setItem('3',vote3)
+            lis[2].innerHTML=vote3;
+            
+        })
+        btn4.addEventListener('click',function(){
+            vote4++;
+            localStorage.setItem('4',vote4)
+            lis[3].innerHTML=vote4;
+            
+        })
+
+        lis[0].innerHTML=vote1;
+        lis[1].innerHTML=vote2;
+        lis[2].innerHTML=vote3;
+        lis[3].innerHTML=vote4;
+
+        result.addEventListener('click',function(){
+            ul.classList.toggle('active')
+        })
+
+
+    </script> -->
+
+    <!-- ======================================================================== -->
+
+    <h1>JSON</h1>
+    <h3>JavaScript Object Notation</h3>
+    <p>데이터를 전송하고 저장하는 데 쓰이는 포멧. 문자</p>
+
+    <script>
+        var car = {name : '제네시스'}
+        var json = '{"name":"제네시스"}' //json format
+        // 쌍따옴표로 key와 value가 감싸져 있다.
+
+
+        console.log(car) //{name: '제네시스'}
+        console.log(typeof car) //object
+
+        localStorage.setItem('car',car)
+        //car	[object Object] >> car 가 value 로 들어가지 못함
+
+        var txt = JSON.stringify(car)
+
+        console.log(txt) //{"name":"제네시스"}
+        console.log(typeof txt) //string
+
+        localStorage.setItem('cars',txt)
+        //cars  {"name":"제네시스"} >> 잘 들어감
+
+        var obj = JSON.parse(txt)
+
+        console.log(obj) //{name: '제네시스'}
+        console.log(typeof obj) //object
+
+        // data.go.kr
+        // 예시 데이터 보기 좋음. 어플리케이션 관심 있다면 여기서 자료 받아서 만들어볼 수 있음
+    </script>
+
+
+</body>
+</html>

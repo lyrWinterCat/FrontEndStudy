@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 이미지 1:1 비율 반응형 만들기 -->
+
+    <!-- <style>
+        /* img {
+            width : 300px;
+            height : 300px;
+            object-fit: cover;
+            이렇게 한 것은 반응형이 아님. 크기 고정
+        } */
+        body {
+            border : 3px solid pink;
+        }
+        img {
+            width : 100%;
+            object-fit: cover;
+        }
+    </style>
+
+    <img src="../img/cat1.jpg" alt="">
+    <img src="../img/cat2.jpg" alt="">
+    <img src="../img/cat3.jpg" alt="">
+
+    <script>
+        /// 태그를 불러오는 경우 그냥 '' 안에 이름만 써 주면 됨
+        var imgs = document.querySelectorAll('img') 
+
+        console.log(imgs) //잘 가져왔는지 확인
+        // clientWidth >> border와 padding을 제외한 넓이
+        console.log(imgs.offsetWidth) // >> border와 padding을 포함한 넓이
+
+        imgs.style.height = imgs.offsetWidth+'px';
+        window.addEventListener('resize', function(){ //맨 앞 window는 생략 가능
+            console.log(imgs.offsetWidth)
+            imgs.style.height = imgs.offsetWidth+'px';
+        })
+    </script> -->
+
+        <!-- <style>
+        .container {
+            /* border : 3px dashed; */
+            width : 350px;
+            height : 350px;
+            position : relative;
+        }
+        .container img  {
+            width : 100%;
+            height : 100%;
+            object-fit: cover;
+            position : absolute;
+            transition: 1s;
+        }
+
+    </style>
+    <div class="container">
+        <img src="../img/dog1.jpg" alt="" class="img">
+        <img src="../img/dog2.jpg" alt="" class="img">
+        <img src="../img/dog3.jpg" alt="" class="img">
+        <img src="../img/dog4.jpg" alt="" class="img">
+    </div>
+
+    <script>
+        var imgs = document.querySelectorAll('img');
+        var index=-1;
+
+        setInterval(navigateTo,2000)
+        navigateTo()
+        function navigateTo(){
+            index++;
+
+            if(index===3){
+                index=0;
+            }
+            console.log(index)
+        }
+
+        //모든 이미지를 안보이게 한다
+        imgs.forEach(function(img){
+            img.style.display='none'
+        })
+        //index에 해당하는 이미지만 보이게 한다.
+        imgs[index].style.display='block';
+
+    </script> -->
+
+    <!-- 이미지 1:1 비율 반응형 만들기 (이미지 여러개) 실습 -->
+    <!-- <style>
+        .container {
+            overflow: auto;
+        }
+        img {
+            width : 33.33333%;
+            float: left;
+            object-fit: cover;
+            padding : 2px;
+            box-sizing: border-box;
+        }
+    </style>
+    <div class="container">
+        <img src="../img/cat1.jpg" alt="">
+        <img src="../img/cat2.jpg" alt="">
+        <img src="../img/cat3.jpg" alt="">
+    </div>
+
+    <div class="container">
+        <img src="../img/dog1.jpg" alt="">
+        <img src="../img/dog2.jpg" alt="">
+        <img src="../img/dog3.jpg" alt="">
+    </div>
+    <div class="container">
+        <img src="../img/cat4.jpg" alt="">
+        <img src="../img/dog4.jpg" alt="">
+        <img src="../img/cat5.jpg" alt="">
+    </div>
+
+    <script>
+        var imgs = document.querySelectorAll('img');
+
+        // console.log(imgs)
+
+        //페이지가 load(refresh)되었을 때
+        imgs.forEach(function(img){
+            img.style.height = img.offsetWidth+'px';
+        })
+        //브라우저의 크기가 재조정될 때
+        window.addEventListener('resize', function(){ //맨 앞 window는 생략 가능
+            imgs.forEach(function(img){
+                img.style.height = img.offsetWidth+'px';
+            })
+        })
+
+    </script> -->
+
+    <!-- ---------------------------------------------------------------------------------- -->
+
+    <!-- 이미지 next prev 버튼으로 무한루프 돌게 하기 -->
+
+    <!-- <style>
+        .container {
+            /* border : 3px dashed; */
+            width : 350px;
+            height : 350px;
+            position : relative;
+        }
+        .container img  {
+            width : 100%;
+            height : 100%;
+            object-fit: cover;
+            position : absolute;
+            transition: 1s;
+        }
+
+        .dots{
+            position : absolute;
+            top : 20px;
+            left : 155px;
+
+        }
+        .dot {
+            width : 10px;
+            height : 10px;
+            background-color: #ddd;
+            border-radius: 50%;
+
+            display : inline-block;
+        }
+        .active {
+            background-color: #888;
+        }
+    </style>
+
+    <div class="container">
+        <img src="../img/dog1.jpg" alt="">
+        <img src="../img/dog2.jpg" alt="">
+        <img src="../img/dog3.jpg" alt="">
+        <img src="../img/dog4.jpg" alt="">
+    </div>
+    <div class="nav">
+        <button class="prev" onclick="navigateTo(-1)">prev</button>
+        <button class="next" onclick="navigateTo(1)">next</button>
+    </div>
+
+    <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <script>
+        var imgs = document.querySelectorAll('img')
+        var prevBtn = document.querySelector('.prev')
+        var nextBtn = document.querySelector('.next')
+        var dots = document.querySelectorAll('.dot')
+    
+        index = 0;
+
+        // function navigateTo(data) { //내가 한 거
+        //     index += data;
+        //     console.log(index)
+
+        //     if(index>=0) {
+        //         imgs.forEach(function(img) {
+        //             img.style.opacity = 0;
+        //         })
+        //         if(index%4==0){
+        //             imgs[index%4].style.opacity=1;
+        //         }else if(index%4==1){
+        //             imgs[index%4].style.opacity=1;
+        //         }else if(index%4==2){
+        //             imgs[index%4].style.opacity=1;
+        //         }else {
+        //             imgs[index%4].style.opacity=1;
+        //         }
+
+        //     }
+        //     if(index<0) {
+        //         imgs.forEach(function(img){
+        //             img.style.opacity=0;
+        //         })
+        //         if(index%4==3){
+        //             imgs[(-index%4)+2].style.opacity=1;
+        //         }else if(index%4==2){
+        //             imgs[-index%4].style.opacity=1;
+        //         }else if(index%4==1){
+        //             imgs[(-index%4)-2].style.opacity=1;
+        //         }else {
+        //             imgs[-index%4].style.opacity=1;
+        //         }
+        //     }
+
+
+        //     dots.forEach(function(dot){
+        //         dot.classList.remove('active');
+        //     })
+        //     if(index>=0){
+        //         if(index%4==0){
+        //             dots[index%4].classList.add('active');
+        //         }else if(index%4==1){
+        //             dots[index%4].classList.add('active');
+        //         }else if(index%4==2){
+        //             dots[index%4].classList.add('active');
+        //         }else {
+        //             dots[index%4].classList.add('active');
+        //         }                
+        //     }
+        //     if(index<0){
+        //         if(index%4==3){
+        //             dots[(-index%4)+2].classList.add('active');
+        //         }else if(index%4==2){
+        //             dots[-index%4].classList.add('active');
+        //         }else if(index%4==1){
+        //             dots[(-index%4)-2].classList.add('active');
+        //         }else {
+        //             dots[-index%4].classList.add('active');
+        //         }
+
+        //     }
+
+        //     // hideButton()
+
+        // }
+
+        function navigateTo(data){
+            index += data
+            console.log(index);
+            //첫 사진에서 이전 버튼을 누를 때
+            if(index===-1){
+                index=imgs.length-1
+            }
+
+            // 마지막 사진에서 다음 버튼을 누를 때
+            if(index===imgs.length){
+                index=0;
+            }
+
+            imgs.forEach(function(img){
+                img.style.opacity=0;
+            }) 
+            imgs[index].style.opacity=1;
+
+            dots.forEach(function(dot){
+                dot.classList.remove('active');
+            })
+            dots[index].classList.add('active');
+        }
+        
+        function hideButton() {
+            prevBtn.style.display='inline-block';
+            nextBtn.style.display='inline-block';
+            if(index===0) {
+                prevBtn.style.display='none';
+            }
+            if (index===imgs.length-1) {
+                nextBtn.style.display='none';
+            }
+        }
+        navigateTo(0)
+
+    </script> -->
+
+<!-- ---------------------------------------------------------------------------------- -->
+    <!-- 버튼 클릭 시 이미지 비율 바꾸기 -->
+
+       <!-- <style>
+           .container {
+               border : 3px dashed;
+               overflow: auto;
+           }
+           .col {
+               float: left;
+               width : 33.33333%;
+               box-sizing: border-box;
+               border : 3px dashed red;
+           }
+           img {
+               width : 100%;
+           }
+       </style>
+
+    <button onclick="arrangeColumn(1)">1</button>
+    <button onclick="arrangeColumn(3)">3</button>
+    <div class="container">
+        <div class="col">
+            <img src="../img/tea1.jpg" alt="">
+            <img src="../img/tea2.jpg" alt="">
+            <img src="../img/tea3.jpg" alt="">
+        </div>
+        <div class="col">
+            <img src="../img/cake1.jpg" alt="">
+            <img src="../img/cake2.jpg" alt="">
+            <img src="../img/cake3.jpg" alt="">
+        </div>
+        <div class="col">
+            <img src="../img/food1.jpg" alt="">
+            <img src="../img/food2.jpg" alt="">
+            <img src="../img/food3.jpg" alt="">
+        </div>
+    </div>
+
+    <script>
+        var cols = document.querySelectorAll('.col');
+        console.log(cols)
+
+        function arrangeColumn(data){
+            console.log(data)
+
+            console.log(100/data)
+            cols.forEach(function(col){
+                col.style.width = (100/data)+'%'
+            })
+        }
+
+    </script> -->
+
+    <!-- ---------------------------------------------------------------------------------- -->
+    <!-- 이미지 슬라이드 만들기 (버튼 누르면 이미지가 슬라이드) -->
+
+    <!-- <style>
+
+        .container {
+            /* border : 3px dashed; */
+            width :300px;
+            height : 300px;
+            /* white-space: nowrap; */
+            /* 이미지는 기본적으로 inline-block이므로, 이미지가 옆으로 쭉 나열됨 */
+            
+            /* overflow: auto; */
+            /* 점선 콘테이너에서 벗어난 부분을 스크롤처리 */
+            overflow: hidden;
+            /* 넘친 부분 숨기기 */
+
+            display : flex;
+            /* 이미지 사이의 틈 사라지기 white-space, 이미지 display 주석처리 후 적용*/
+            /* 이미지에서만 가능. div로 .item 을 만들어서 접근할 경우 틈 사라지지 않음 */
+            
+        }
+        img  {
+            width : 100%;
+            height : 100%;
+            object-fit: cover;
+            transition: 0.5s;
+            
+            /* 이미지 기본 디스플레이 */
+            /* display : inline-block; */
+        }
+
+        .prev, .next {
+            border-radius: 50%;
+            border : none;
+            background-color: rgba(255,255,255,0.3);
+            width : 25px;
+            height : 25px; 
+            cursor : pointer;
+        }
+        .prev {
+            left : 20px;
+        }
+        .next {
+            right : 20px;
+        }
+
+    </style>
+
+    <div class="container">
+        <img src="../img/cat1.jpg" alt="">
+        <img src="../img/cat2.jpg" alt="">
+        <img src="../img/cat3.jpg" alt="">
+        <img src="../img/cat4.jpg" alt="">
+        <img src="../img/cat5.jpg" alt="">
+    </div>
+    <div class="nav">
+        <button class="prev" onclick="navigateTo(-1)">&#10094;</button>
+        <button class="next" onclick="navigateTo(1)">&#10095;</button>
+    </div>
+
+    <script>
+        var imgs = document.querySelectorAll('img');
+        var index=0;
+        var prevBtn = document.querySelector('.prev')
+        var nextBtn = document.querySelector('.next')
+        
+        console.log(imgs)
+
+        function navigateTo(data){
+            index += data;
+
+            // console.log(index)
+
+            imgs.forEach(function(img){
+                // Template literal(템플릿 리터럴)
+                // 문자열 안에서 JavaScript변수 사용 가능
+
+                img.style.transform=`translateX(-${index*100}%)`
+                // 인덱스값에 따라 이미지 이동 코드(가로로 index*100 % 만큼 이동)
+
+            })
+        }
+ 
+
+        
+    </script> -->
+
+    <!-- 좋아요, 평점 버튼 만들기 (누르면 색 변경, 다시 누르면 취소) + 로딩 애니메이션 -->
+
+    
+    <style>
+        .fa-thumbs-up {
+            font-size : 50px;
+            cursor: pointer;
+        }
+        .fa-star {
+            font-size : 50px;
+        }
+        .good{
+            color: rgb(70, 27, 228);
+        }
+        .like{
+            color : rgb(230, 230, 97);
+        }
+
+        /* 기능들 주석처리 하면서 파악하기 */
+        .loader {
+            border : 16px solid #3498bd;
+            border-radius: 50%;
+
+            border-top: 16px solid #fff;
+            /* 돌아가는 부분의 흰색 부분 */
+
+            width : 120px;
+            height : 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {transform : rotate(0deg);}
+            100% {transform : rotate(360deg);}
+        }
+
+    </style>
+<script src="https://kit.fontawesome.com/010d46e4b1.js" crossorigin="anonymous"></script>
+
+    <h1>좋아요</h1>
+    <i class="fa-solid fa-thumbs-up" id="like"></i>
+
+    <h1>고객 리뷰</h1>
+    <div class="star">
+        <i class="fa-solid fa-star" onclick="toggleStar(0)"></i>
+        <i class="fa-solid fa-star" onclick="toggleStar(1)"></i>
+        <i class="fa-solid fa-star" onclick="toggleStar(2)"></i>
+        <i class="fa-solid fa-star" onclick="toggleStar(3)"></i>
+        <i class="fa-solid fa-star" onclick="toggleStar(4)"></i>
+    </div>
+    <br><br>
+    <h1 id="message"></h1>
+    <div id="loader" class="loader"></div>
+    
+    <script>
+        var likeBtn = document.querySelector('.fa-thumbs-up');
+        var starBtns = document.querySelectorAll('.fa-star')
+        var index=0;
+
+        console.log(likeBtn)
+        console.log(starBtns)
+
+        // 내가 한 것
+        // likeBtn.addEventListener('click', function(){
+        //     likeBtn.classList.toggle('good');
+        // })
+
+        likeBtn.addEventListener('click',function(e){
+            console.log(e)
+            console.log(e.target)
+
+            e.target.classList.toggle('good')
+        })
+
+        function toggleStar(data) {
+            console.log(data)
+
+            // active를 모두 없앤다(초기화)
+            for (star of starBtns) {
+                star.classList.remove('like')
+            }
+
+            // 0부터 클릭한 index까지 active 추가
+            for(i=0; i<data+1; i++) {
+                starBtns[i].classList.add('like')
+            }
+        }
+    
+
+        setTimeout(myFunction, 3000)
+
+        // 로딩 후 메세지 넣기
+        function myFunction(){
+            document.getElementById('loader').style.display='none'
+            document.getElementById('message').innerHTML='안녕하세요'
+        }
+    </script>
+</body>
+</html>

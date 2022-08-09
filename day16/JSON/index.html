@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+     <!-- JSON 이론  -->
+    <!-- <h1>JSON</h1>
+    <h3>JavaScript Object Notation</h3>
+    <p>데이터를 전송하고 저장하는 데 쓰이는 포멧. 문자</p>
+
+    <script>
+        var car = {name : '제네시스'}
+        var json = '{"name":"제네시스"}' //json format
+        // 쌍따옴표로 key와 value가 감싸져 있다.
+
+
+        console.log(car) //{name: '제네시스'}
+        console.log(typeof car) //object
+
+        localStorage.setItem('car',car)
+        //car	[object Object] >> car 가 value 로 들어가지 못함
+
+
+        // JSON.stringify(object) : object를 json format으로 변경한다.
+        var txt = JSON.stringify(car)
+
+        console.log(txt) //{"name":"제네시스"}
+        console.log(typeof txt) //string
+
+        localStorage.setItem('cars',txt)
+        //cars  {"name":"제네시스"} >> 잘 들어감
+
+
+        // JSON.parse(string) : string(json)을 object로 변환한다.
+        var obj = JSON.parse(txt)
+
+        console.log(obj) //{name: '제네시스'}
+        console.log(typeof obj) //object
+        console.log(obj.name) // 제네시스 접근 가능 >> parse를 해주었기 때문
+
+        // data.go.kr
+        // 예시 데이터 보기 좋음. 어플리케이션 관심 있다면 여기서 자료 받아서 만들어볼 수 있음
+    </script> -->
+
+    <!-- ============================================================================= -->
+
+    <!-- 투표 어플리케이션 만들기 -->
+    <!-- <h1>2022년 최고의 자동차는? </h1>
+
+    <button onclick="voting(1)">제네시스</button>
+    <button onclick="voting(2)">스타리아</button>
+    <button onclick="voting(3)">아이오닉</button>
+    <button onclick="voting(4)">캐스퍼</button>
+
+    <hr>
+
+    <div id="result"></div>
+    <button onclick="getResult()">결과보기</button>
+    
+    <script>
+        if(localStorage.getItem('vote')===null) { //초기화 시켜주기
+            var DATA=[
+                {id:1, name:'제네시스',count:0},
+                {id:2, name:'스타리아',count:0},
+                {id:3, name:'아이오닉',count:0},
+                {id:4, name:'캐스퍼',count:0},
+            ]
+
+            localStorage.setItem('vote',JSON.stringify(DATA))
+        }
+
+        function voting(id){
+            // console.log(id) >> 잘 들어오나 확인
+            //JSON에서 가져올때는 주로 parse
+            var arr = JSON.parse(localStorage.getItem('vote'));
+
+            arr.map(function(item){
+                if (item.id===id){
+                    item.count++;
+                }
+            })
+
+            //vote를 덮어쓴다
+            // 다시 값을 집어넣을때는 stringify
+            localStorage.setItem('vote',JSON.stringify(arr))
+        }
+
+        function getResult(){
+            console.log(localStorage.getItem('vote'))
+
+            // document.getElementById('result').innerHTML=localStorage.getItem('vote')
+            
+            var ul = document.createElement('ul')
+
+            JSON.parse(localStorage.getItem('vote')).map(function(item){
+                var li = document.createElement('li');
+                li.innerHTML=`${item.name} ${item.count}표`;
+                ul.appendChild(li)
+
+            })
+            // append가 아닌 replace로 계속 결과창이 뜨지 않고 결과창을 덮어씌우기
+            document.getElementById('result').replaceChildren(ul)
+
+            // 나는 아예 배열로 선언할라했는디.. 하긴 vote에 값들이 다 있으니 가져만 와도 됨..
+            // var cars = ['제네시스','스타리아','아이오닉','캐스퍼']
+            // for(car of cars){
+            //     var li = document.createElement('li');
+            //     li.innerHTML=car;
+            //     ul.appendChild(li)
+            // }
+
+            // document.getElementById('result').appendChild(ul)
+
+            // var cnt = localStorage.getItem('count';
+            // for (count of cnt){
+            //     var li = document.createElement('li');
+            //     li.innerHTML=count;
+            //     ul.appendChild(li)
+            // }
+        }
+        // template literal 문자열 안에서  JavaScript 변수 사용이 가능
+        // var age = 20
+        // var something=`저는 ${age}살 입니다.`
+        // var something=`저는`+age+`살 입니다.`
+
+        // map과 foreach
+        var fruit = ['apple','banana','kiwi']
+        // 조건에 맞는 새로운 array를 만듦. foreach보다 더 자주 사용
+        // 빈 array를 따로 만들어 줄 필요없이 값만 할당해주면 됨
+        var bigFruits = fruit.map(function(fruit){
+            // 여기에 map 대신 forEach를 쓰면 실행 안됨
+            return fruit.toUpperCase()
+        })
+        console.log(bigFruits)
+
+        //forEach로 만들 경우
+        var bigFruits = []; // >>빈 array를 만들고
+        fruit.forEach(function(fruit){
+            // array에 아이템 추가(마지막)
+            // array.push()
+            bigFruits.push(fruit.toUpperCase())
+        })
+        console.log(bigFruits)
+
+        // for문으로 할 경우 >> 인덱스 접근! 
+        // 빈 array에 아이템을 추가한다.
+        for(i=0; i<fruit.length; i++) {
+            bigfruits.push(fruit[i].toUpperCase())
+        }
+        console.log(bigFruits)
+    </script> -->
+
+    <!-- for와 map차이 추가 -->
+
+    <!-- <ul>
+        <li class="item">item 1</li>
+        <li class="item">item 2</li>
+        <li class="item">item 3</li>
+    </ul>
+
+    <script>
+        var items = document.querySelectorAll('.item')// nodeList(3)
+        console.log(items) 
+
+        // forEach는 nodeList로 반복문을 돌 수 있다!
+        items.forEach(function(item){
+            console.log(item)
+        })
+
+        // nodeList는 map으로 작업할 수 없다.
+        items.map(funtion (item) {
+            console.log(item)
+        })
+
+        // 반복할 값의 배열 형태에 따라
+        // array >> map 사용 추천
+        // nodeList >> forEach 사용 추천
+    </script> -->
+
+<!-- ============================================================================= -->
+
+<!-- <div id="root"></div>
+
+<script>
+    // // textContent : text만 가능하다.
+    // document.getElementById('root').textContent='hello world'
+
+    // // innerHTML : text와 tag 모두 사용 가능
+    // document.getElementById('root').innerHTML='<h1> hello world </h1>'
+
+    // var hello = 'hello world'
+    // document.getElementById('root').innerHTML=`<h1>${hello}</h1>`
+
+    // 함수의 리턴
+    function hello(){
+        console.log('아아안녀어엉')
+        return 'hello world'
+        // 함수에 return이 있으면 거기에서 끝남.
+        // 리턴 밑의 모든 코드는 무시된다.(실행되지 않음)
+        console.log('안녕하세여')
+    }
+    console.log(hello())
+</script> -->
+
+<!-- ============================================================================= -->
+
+<!-- to do List 만들고 LocalStorage에 저장해보기 (아이디값 붙여서) -->
+
+<!-- <h1>할 일 목록</h1>
+<input type="text"> <button>추가</button>
+<div id="root"></div>
+
+<script>
+    
+    var input = document.querySelector('input');
+    var button = document.querySelector('button');
+    var ul = document.createElement('ul');
+    var toDos=[];
+    
+        button.addEventListener('click', Todo)
+    
+        function Todo(){
+            var newInput=input.value
+            var newObj = {
+                text : newInput,
+                id : Math.random(),
+                is_done:false
+            }
+            // input에서 받아온 텍스트 콘솔창에 찍어보기
+            console.log(newInput)
+   
+            // input 에서 받아온 텍스트를 html에 추가하기
+            var li = document.createElement('li');
+    
+            // `${정상출력} html 코드 사용 가능 구역`
+            li.innerHTML=`${newInput} <span onclick="deleteItem(this)">&times;</span>`;
+            ul.appendChild(li)
+    
+            //텍스트 추가 후 input 초기화
+            input.value=''
+            toDos.push(newObj);
+            saveToDos();
+            
+        }
+        document.getElementById('root').appendChild(ul)
+
+        
+        function saveToDos(){
+            localStorage.setItem(TODO_KEY, JSON.stringify(toDos))
+        }        
+
+    
+    function deleteItem(data){
+        // 해당 x버튼(span)이 속해있는 부모테그(li) display none 설정
+        data.parentElement.style.display='none';
+    }
+    
+</script> -->
+
+<!-- <h1>할 일 목록</h1>
+<input type="text"> <button onclick="addItem()">추가</button>
+<ul></ul>
+
+<script>
+    var input=document.querySelector('input');
+    var ul = document.querySelector('ul');
+
+    if(localStorage.getItem('todo')===null) {
+        //JSON.stringify([])
+        localStorage.setItem('todo','[]');
+    } else {
+        // HTML에 localStorage 아이템을 추가한다.
+        JSON.parse(localStorage.getItem('todo')).map(function(item){
+            var li = document.createElement('li')
+            li.setAttribute('id', item.id);
+            li.innerHTML=`${item.name} <span onclick="removeItem(${item.id})">&times;</span>`;
+            ul.appendChild(li);
+        })
+    }
+
+    function addItem() { // 리스트 추가 기능 메서드
+        console.log(input.value)
+
+        if(input.value===''){
+            alert('내용을 입력하세요.');
+            // 함수를 중지한다.
+            return;
+        }
+
+        // id를 만든다 (Math.random() >> 랜덤 숫자 생성)
+        var id=Math.random();
+        console.log(id)
+
+        // localStorage를 업데이트
+        var arr = JSON.parse(localStorage.getItem('todo'));
+        arr.push({id: id, name : input.value})
+        localStorage.setItem('todo',JSON.stringify(arr))
+
+        // html에 추가
+        var li = document.createElement('li');
+        li.setAttribute('id', id);
+        li.innerHTML=`${input.value} <span onclick="removeItem(${id})">&times;</span>`
+        ul.appendChild(li)
+
+        input.value='';
+    }
+
+    function removeItem(id){ //삭제 기능 구현 메서드
+        console.log(id)
+
+        var arr = JSON.parse(localStorage.getItem('todo'));
+
+        // array.filter() 조건에 맞는 array를 반환
+        var result=arr.filter(function(item){
+            if(item.id!==id){
+                return item;
+            }
+        })
+
+        // 삭제한 결과 result를 다시 todo 저장소에 덮어씌우기
+        // 새로고침을 해주어야 삭제된 것이 웹에 표시됨
+        localStorage.setItem('todo',JSON.stringify(result))
+
+        // 삭제버튼 누르자마자 화면에서 사라지게 하기 (id 활용)
+        // 해당 id를 가진 li를 화면에서 안보이게 함(삭제는 아님)
+        document.getElementById(id).style.display='none'
+
+        console.log(result)
+    }
+
+</script> -->
+
+<!-- ============================================================================= -->
+
+<!-- 쇼핑몰 장바구니 추가 홈페이지 만들기 -->
+<!-- 1. 상품 페이지 구현하기
+2. shopping cart 페이지에 table로 id, name, price, quantity, item total, removeitem 기능 구현
+( id:1, 상품명, 상품가격, 상품갯수, 상품 총 가격, 상품 제거 체크박스) 
+https://upcake.tistory.com/264 https://blogpack.tistory.com/704  참고하기-->
+
+<!-- <h1>Shopping List</h1>
+<div id="root"></div>
+<button onclick="showCart()"> My Cart </button>
+<button onclick="deleteCart()"> Delete </button>
+
+<div id="result"></div>
+
+<script>
+    var DATA = [
+        {id:1, name : '쿠키1', cost : 1.1},
+        {id:2, name : '쿠키2', cost : 1.2},
+        {id:3, name : '쿠키3', cost : 0.7},
+        {id:4, name : '쿠키4', cost : 0.8},
+        {id:5, name : '쿠키5', cost : 1.5},
+        {id:6, name : '쿠키6', cost : 1.3}
+    ];
+    // var DATA = await fetch('/server.php');  >> 실전코드. 백엔드에서 자료 받아오기
+    
+    var ul = document.createElement('ul')
+
+    DATA.map(function(item){
+        var li = document.createElement('li');
+        li.innerHTML=`${item.name}, $${item.cost} <button onclick="addToCart(${item.id})">장바구니에 추가</button>`
+        ul.appendChild(li)
+    })
+
+    document.getElementById('root').appendChild(ul)
+
+    function addToCart(id) {
+        console.log(id)
+
+        if(localStorage.getItem('cart')===null){
+            //JSON.stringify([]); >> 같은표현
+            localStorage.setItem('cart','[]')
+        }
+
+        var cart = JSON.parse(localStorage.getItem('cart'));
+
+        // 불린형 변수 생성 / 카트 내에 있는 물품인지 아닌지 판별하기위해
+        var isCart=false; 
+        
+        // 카트에 이미 있는 물품인지 검사
+        cart.map(function (item){
+            if(item.id===id) {
+                item.quantity++;
+                isCart=true;
+                alert('장바구니에 상품이 추가되었습니다.')
+            }
+        })
+        
+        // 카트에 상품 추가 >> 카트에 있는 물품이 아닐 경우에만
+        if(isCart===false) {            
+            DATA.map(function (data){
+                if(data.id == id){
+                    cart.push({id:data.id, quantity:1});
+                    alert('장바구니에 상품이 추가되었습니다.')
+                }
+            })
+        }
+        localStorage.setItem('cart',JSON.stringify(cart));
+    }
+
+    function showCart() {
+        // 가장먼저 array를 parse해서 접근할 수 있게 만들기
+        var cart = JSON.parse(localStorage.getItem('cart'));
+
+        var ul = document.createElement('ul');
+
+
+        // db가 없어서 이렇게 만듦
+        // DATA 와 Cart array 비교
+        DATA.map(function(data){ //데이터 중에서 (데이터의 수만큼 반복)
+            cart.map(function(item){ // 내 카트에 있는 것만 가져오기 (카트의 수만큼 반복)
+                if(data.id===item.id){
+                    console.log(item)
+
+                    var li = document.createElement('li')
+                    li.innerHTML = `상품명 : ${data.name}, 수량 : ${item.quantity}, 가격 : $${data.cost* item.quantity}, 상품 삭제 : <input type="checkbox">`
+                    // 만약 내가 제거 체크박스를 만든다면 여기서 추가하겟지?
+                    // 추가하고 조건문으로 비교해서 삭제하기 만들기. 해당 li를 제거하면 되니까..
+                    ul.appendChild(li)
+
+                    // 체크박스값
+                    function getDeleteCheckBox(event) {
+                        var result='';
+                        if(event.target.checked){
+                            
+                        }
+                    }
+                }
+            })
+        })
+        document.getElementById('result').replaceChildren(ul);
+    }
+
+    function deleteCart(event) {
+        if(event.target.checked) {
+
+        }
+    }
+</script> -->
+<script src="./script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<!-- 쇼핑몰 장바구니 추가 홈페이지 만들기 -->
+<!-- 1. 상품 페이지 구현하기
+2. shopping cart 페이지에 table로 id, name, price, quantity, item total, removeitem 기능 구현
+( id:1, 상품명, 상품가격, 상품갯수, 상품 총 가격, 상품 제거 체크박스) 
+https://upcake.tistory.com/264 참고하기-->
+
+<style>
+    .item_list .card img{
+        height : 200px;
+        width : 250px;
+        object-fit: cover;
+        
+    }
+    .card {
+        padding : 3px;
+    }
+
+    .shopping_cart {
+        border : 1px solid;
+        border-collapse: collapse;
+        text-align: center;
+    }
+    th, td {
+        border : 1px solid;
+    }
+</style>
+
+<h3> [디저트 가게] </h3>
+<div class="item_list">
+    <table class="item_list">
+        <tr>
+            <td>
+                <div class="card">
+                    <div class="img">
+                        <img src="../../img/cookie1.jpg" alt="">
+                    </div>
+                    <div class="text">
+                        <p>상품명 : 쿠키 1</p>
+                        <p>상품 가격 : 개당 1000원</p>
+                    </div>
+                    <div class="cart_btn">
+                        <button onclick="window.open('self_project2.html')">장바구니 추가</button>
+                    </div>
+                </div>          
+            </td>
+            <td>
+                <div class="card">
+                    <div class="img">
+                        <img src="../../img/cookie2.jpg" alt="">
+                    </div>
+                    <div class="text">
+                        <p>상품명 : 쿠키 2</p>
+                        <p>상품 가격 : 개당 1000원</p>
+                    </div>
+                    <div class="cart_btn">
+                        <button>장바구니 추가</button>
+                    </div>
+                </div>          
+            </td>
+            <td>
+                <div class="card">
+                    <div class="img">
+                        <img src="../../img/cookie3.jpg" alt="">
+                    </div>
+                    <div class="text">
+                        <p>상품명 : 쿠키 3</p>
+                        <p>상품 가격 : 개당 1000원</p>
+                    </div>
+                    <div class="cart_btn">
+                        <button>장바구니 추가</button>
+                    </div>
+                </div>          
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="card">
+                    <div class="img">
+                        <img src="../../img/cookie4.jpg" alt="">
+                    </div>
+                    <div class="text">
+                        <p>상품명 : 쿠키 4</p>
+                        <p>상품 가격 : 개당 1000원</p>
+                    </div>
+                    <div class="cart_btn">
+                        <button>장바구니 추가</button>
+                    </div>
+                </div>          
+            </td>
+            <td>
+                <div class="card">
+                    <div class="img">
+                        <img src="../../img/cookie5.jpg" alt="">
+                    </div>
+                    <div class="text">
+                        <p>상품명 : 쿠키 5</p>
+                        <p>상품 가격 : 개당 1000원</p>
+                    </div>
+                    <div class="cart_btn">
+                        <button>장바구니 추가</button>
+                    </div>
+                </div>          
+            </td>
+            <td>
+                <div class="card">
+                    <div class="img">
+                        <img src="../../img/cookie6.jpg" alt="">
+                    </div>
+                    <div class="text">
+                        <p>상품명 : 쿠키 6</p>
+                        <p>상품 가격 : 개당 1000원</p>
+                    </div>
+                    <div class="cart_btn">
+                        <button>장바구니 추가</button>
+                    </div>
+                </div>          
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="card">
+                    <div class="img">
+                        <img src="../../img/cake1.jpg" alt="">
+                    </div>
+                    <div class="text">
+                        <p>상품명 : 케잌 1</p>
+                        <p>상품 가격 : 조각 당 3000원</p>
+                    </div>
+                    <div class="cart_btn">
+                        <button>장바구니 추가</button>
+                    </div>
+                </div>          
+            </td>
+            <td>
+                <div class="card">
+                    <div class="img">
+                        <img src="../../img/cake2.jpg" alt="">
+                    </div>
+                    <div class="text">
+                        <p>상품명 : 케잌 2</p>
+                        <p>상품 가격 : 개당 4000원</p>
+                    </div>
+                    <div class="cart_btn">
+                        <button>장바구니 추가</button>
+                    </div>
+                </div>          
+            </td>
+            <td>
+                <div class="card">
+                    <div class="img">
+                        <img src="../../img/cake3.jpg" alt="">
+                    </div>
+                    <div class="text">
+                        <p>상품명 : 케잌 3</p>
+                        <p>상품 가격 : 조각 당 3500원</p>
+                    </div>
+                    <div class="cart_btn">
+                        <button>장바구니 추가</button>
+                    </div>
+                </div>          
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<h1>Shopping Cart</h1>
+<table class="shopping_cart">
+    <tr>
+        <th>번호</th>
+        <th>상품 이름</th>
+        <th>상품 가격</th>
+        <th>구매 개수</th>
+        <th>총 지불 가격</th>
+        <th>상품 제거 체크</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>쿠키1</td>
+        <td>1000</td>
+        <td><input type="number"></td>
+        <td>5000</td>
+        <td><input type="checkbox"></td>
+    </tr>
+
+</table>
+
+<script>
+    var btns = document.querySelectorAll('.cart_btn')
+    console.log(btns)
+
+    // 이제 여기에 장바구니 추가 누르면
+    // 해당 버튼에 해당하는 품목의 이름, 가격 받아와서 표에 넣고
+    // 구매개수 클릭개수로 넣거나 input number로 넣고
+    // 그거에 맞게 총 지불가격 넣고
+    // 상품 제거 체크시 삭제하는 함수 만들기
+
+</script>
+
+</body>
+</html>

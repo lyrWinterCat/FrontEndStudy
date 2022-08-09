@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- JavaScript selector(선택자) -->
+
+    <!-- <h1>현대자동차</h1>
+    <p>
+        광고 -->
+        <!-- Entity name : & + name -->
+        <!-- Entitny number : & + number -->
+
+        <!-- onclick="remove()" 라는 함수를 만들어줌 (script에서의 연결용) -->
+        <!-- <span id="remove-ad" onclick="removeAd(this)">&times;</span>
+    </p>
+    <div class="wrap">
+        <ul id="list"> -->
+            <!-- 아이디를 가진 ul >> ul#아이디명 -->
+            <!-- <li class="item">제네시스</li>
+            <li class="item">스타리아</li>
+            <li class="item">코나</li>
+        </ul>
+
+        <input type="text" id="new-item">
+        <button id="add-btn">add</button>
+    </div> -->
+
+    <!-- --------------------------------------------------------------------------------------- -->
+
+    
+    <!-- <form action="">
+        <h1>비밀번호 Toggle</h1>
+        <div class="form-group">
+            <label for="">비밀번호</label>
+            <input id="password-input" type="password" value="pw1234">
+        </div>
+        <div class="form-group">
+            <input type="checkbox" name="" id="" onclick="togglePassword()">
+            <label for="">비밀번호 보기</label>
+        </div>
+    </form> -->
+
+    <!-- ------------------------------------------------------------------------------------------------- -->
+
+    <!-- <style>
+        .accordion {
+            width : 100%;
+            padding : 10px;
+            text-align: left;
+        }
+
+        .panel {
+            display : none;
+        }
+
+        .active, .accordion:hover {
+            background-color: #888;
+        }
+
+    </style>
+
+
+    <h1>Accordion 아코디언</h1>
+
+    <button class="accordion">제네시스</button>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid reprehenderit, maxime sint autem repellat, magnam earum quis aliquam deserunt quae est rem ut animi dicta ad quaerat cupiditate veniam vero.</p>
+    </div>
+
+    <button class="accordion">스타리아</button>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid reprehenderit, maxime sint autem repellat, magnam earum quis aliquam deserunt quae est rem ut animi dicta ad quaerat cupiditate veniam vero.</p>
+    </div>
+
+    <button class="accordion">캐스퍼</button>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid reprehenderit, maxime sint autem repellat, magnam earum quis aliquam deserunt quae est rem ut animi dicta ad quaerat cupiditate veniam vero.</p>
+    </div> -->
+
+     <!-- ------------------------------------------------------------------------------------------------- -->
+
+    <style>
+        nav {
+            border : 1px dashed;
+            position : relative;
+        }
+
+        nav::after{
+            content:"";
+            display : block;
+            clear : left;
+        }
+        nav a {
+            border: 1px dashed;
+            float : left;
+            padding : 10px;
+            width : 100%;
+        }
+
+        /* Pseudo-class(가짜클래스) */
+        nav a:not(.active) {
+            display:none;
+        }
+        .mobile-btn {
+            position : absolute;
+            top:0; right : 20px;
+            font-size : 30px;
+        }
+
+        @media (min-width : 501px) {
+            nav a {
+                /* 기본값 */
+                width : auto;
+                display : block!important;
+            }
+        }
+    </style>
+
+
+    <nav>
+        <span id="mobile-btn" class="mobile-btn">=</span>
+        <a href="" class="active">홈</a>
+        <a class="item" href="">소개</a>
+        <a class="item" href="">블로그</a>
+        <a class="item" href="">연락하기</a>
+    </nav>
+
+    <script>
+
+        var mobileBtn = document.getElementById('mobile-btn');
+        var nav = document.querySelector('nav') // tag(name),class(.name) id(#name)
+
+        mobileBtn.addEventListener('click',function(){
+            // console.log(nav) >>확인용
+            // console.log(nav.children) >>확인용
+            // console.log(nav.chilNodes) >> 이것도 사용불가.
+
+            // NL과 HC의 차이
+            // NodeList(count) >>> 반복 가능
+            // HtmlCollection(count) >>> 반복문을 사용할 수 없다.
+
+            var items=document.querySelectorAll('.item');
+            // console.log(items)
+
+            for(i=0;i<items.length; i++) { //index로 접근해서 값 가져오기
+                console.log(items[i])
+                items[i].classList.toggle('active')
+            }
+
+            // nodelist로 접근을 해야함. 이렇게 하면 안됨.
+            // for(i=0; nav.children.length; i++) {
+            //     console.log(nav.children[i])
+            // }
+        })
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+    <script>
+        // // 아코디언식 버튼 이벤트 연결하기
+
+        // var acc=document.querySelectorAll('.accordion'); //여러개의 클래스를 상속할때 씀
+        // console.log(acc)
+
+        // // array 설명 복습
+        // // var cars = ['제네시스','스타리아','코나','캐스퍼']
+        // // console.log(cars)
+        // // console.log(cars[2]) //cars[index]
+        // // for (i= 0; i < cars.length; i++) { //for문으로 배열 속 인자들 불러오기
+        // //     console.log(cars[i]);
+        // // }
+
+        // for(i=0; i<acc.length; i++) { //for문으로 array처럼 접근함 // NodeList를 array처럼 봐도 됨
+        //     // console.log(acc[i])
+
+        //     // i번째의 버튼을 클릭했을때 이벤트 발생
+        //     acc[i].addEventListener('click',function(e){
+        //         console.log(e)
+        //         console.log(e.target) // 클릭 이벤트를 발생시킨 것이 무엇인지 나타남
+
+        //         console.log(e.target.classList) //이게 뭔지 확인
+        //         e.target.classList.toggle('active') //해당 버튼 클릭시 버튼 클래스에 active 추가 >>> 활성화  표시 색을 넣을 수 있음
+
+        //         var panel = e.target.nextElementSibling; //제네시스 클릭시 다음 div class인 panel이 나옴
+
+        //         console.log(panel) //버튼 클릭시 확인용
+        //         console.log(panel.style.display) //확인용
+
+        //         if(panel.style.display==='block') {
+        //             panel.style.display='none';
+        //         } else {
+        //             panel.style.display='block';
+        //         }
+        //     })
+        // }
+
+    </script>
+
+
+    <script>
+        // // 비밀번호 보기 이벤트 연결하기
+
+        // function togglePassword() {
+        //     var pwInput=document.getElementById('password-input')
+        //     console.log(pwInput) //클릭시 잘 나오나 확인
+
+        //     console.log(pwInput.getAttribute('type'))
+        //     console.log(pwInput.type)
+
+        //     //자바스크립트에서 이미 만들어놓은 접근성
+        //     // checkbox를 체크 한다면 비밀번호가 text로 보임
+        //     // 체크해제시 비밀번호가 password로 암호화 되어 보임
+        //     if(pwInput.type==='password') { // === >> value, type 모두 일치하는지 확인
+        //         // pwInput.type='text'
+        //         pwInput.setAttribute('type','text')
+        //     }else {
+        //         // pwInput.type='password'
+        //         pwInput.setAttribute('type','password')
+        //     }
+
+        // }
+
+    </script>
+
+
+    <script>
+        // Event 연습 (비밀번호)
+
+
+        
+
+
+
+        //Event 연습 (현대자동차)
+                
+        // input과 button으로 html의 ul-li에 값 추가하기
+
+        // var addBtn=document.getElementById('add-btn');
+
+        // // addEventListener(event,callback)
+        // addBtn.addEventListener('click',myFunction)
+
+        // function myFunction() {
+        //     // console.log('clicked')
+        //     var list = document.getElementById('list');
+        //     console.log(list);
+        //     // console.log(typeof list) >> list의 타입은 object
+        //     // 현재 다 object로 연결중
+
+        //     var newItem=document.getElementById('new-item')
+        //     console.log(newItem.value)
+
+        //     var li = document.createElement('li')
+        //     li.innerHTML=newItem.value;
+        //     list.appendChild(li)
+        // }
+
+
+        // 광고버튼 없애기
+        // document.getElementById('remove-ad')
+        // function removeAd(el) {
+        //     // console.log('clickad')
+        //     console.log(el) //id= remove-ad 를 클릭했을때 그 데이터가 무엇인지
+        //     console.log(el.parentElement) //해당 데이터의 부모는 무엇인지 >> p태그
+
+        //     el.parentElement.style.display = 'none' // x버튼 클릭하면 광고 버튼 없애기
+        //     // display에 값을 할당할 수 있음! 
+        // }
+
+        //=============================================================================================================
+        // 키보드 누를 시 이벤트 발생 확인
+
+        // var newItem=document.getElementById('new-item') // 도큐먼트에서 아이디로 new-item을 가져와서 변수에 담아주기
+
+        // // window.addEventListener(event,callback); 
+        // //window는 생략가능, 이벤트가 발생했을 때 Callback 실행
+        // // Event >> 마우스 클릭 드래그 스크롤, 창크기 조절, 키보드입력, 문서가 로드됨, ... 이러한 모든 동작들. (사용자의 모든 액션)
+
+        // // newItem.addEventListener('keyup',myFunction) //keyup >> 키보드 누를시 이벤트 발생
+        // // function myFunction(){
+        // //     console.log('...')
+        // // }
+
+        // newItem.addEventListener('keyup',function(e) {
+        //     console.log(e)
+        // }) 
+            // 검색창에 아무값이나 입력시 콘솔창에 ... 나오는지 확인
+        //==================================================================================================================
+
+        // 지난시간 간단하게 복습
+        // var car={ // object. key와 value로 구성됨
+        //     name:'제네시스',
+        //     cost:100,
+        //     sound: function() { // 속성중에 함수인 것 >> 메서드
+        //         return '부르르릉';
+        //     }
+        // }
+        // console.log(car)
+        // console.log(car.name)// property (속성)
+        // console.log(car.cost)
+        // console.log(car.sound()) //method(메서드)
+
+
+        // console.log(window) //브라우저의 열린 탭
+        // console.log(document) // document 선택
+        // // console.log(window.document) // 위에와 같은 뜻    
+        
+        // console.log(document.body)  //<body> 불러오기
+        
+        // console.log(document.body.childNodes) //NodeList(8) [text, comment, text, h1, text, div.wrap, text, script]
+        // // nodes : 모든 값을 다 읽어옴 (띄어쓰기같은 빈칸이나 주석처리까지 다 읽어옴)
+        // // text >> 띄어쓴 칸 (빈칸) 더 띄어쓴다고 여러개가 나오진 않지만, 나오지 않으려면 아예 공백없이 붙어있어야 함
+
+        // console.log(document.body.children) //HTMLCollection(3) [h1, div.wrap, script]
+
+        
+        // ==== 다양한 선택자 ====
+        // console.log(document.getElementById('list'))
+        
+        // console.log(document.querySelector('h1'))
+        // console.log(document.querySelector('#list')) // #은 아이디 .은 클래스
+
+        // console.log(document.querySelector('.item')) //제네시스에 접근(첫번째 아이템)
+        // console.log(document.querySelectorAll('.item')) // 아이템 세개에 모두 접근
+        // console.log(document.querySelectorAll('.item').length)  //3
+        
+        // console.log(document.querySelectorAll('.item')[2]) //코나 에 접근
+
+    </script>
+
+    
+    <!-- <div id="root"></div> -->
+
+    <!-- 스크립트 연결 -->
+    <script src="./script.js"></script> 
+
+</body>
+</html>
+
+

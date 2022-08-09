@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/010d46e4b1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <style>
+
+        body {
+            position : relative;
+        }
+
+        body::after {
+            content: '';
+            display: block;
+            height: 50px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .bg-yellow {           
+            padding : 5px;
+            color : #fff;
+        }
+
+        nav {
+            padding : 10px;
+            background-color: rgba(204, 170, 58, 0.8);
+        }
+
+        nav a:hover {
+            background-color: #fff;
+            color : rgb(141, 139, 10);
+            border-radius: 10px;
+        }
+
+        button{
+            cursor: pointer;
+            border : 0;
+            outline: none;
+            border-radius: 10px;
+        }
+        button:hover {
+            background-color: rgb(236, 211, 65);
+            color : white;
+        }
+        #drinkBtn:hover {
+            background-color: rgb(131, 197, 218);
+        }
+        .foods, .drinks {
+            display: none;
+        }
+
+        .food img {
+            float: left;
+            object-fit: cover;
+            padding : 10px;
+            width : 200px;
+            height: 150px;
+            border-radius: 20px;
+        }
+        .food {
+            display :block;
+        }
+        .food p {
+            clear:both;
+        }
+        .food .addBtn{
+            background-color: rgb(231, 200, 96);
+            cursor: pointer;
+        }
+        .food .addBtn:hover {
+            background-color: rgb(223, 39, 39);
+        }
+        .drink .addBtn{
+            background-color: rgb(131, 197, 218);
+            cursor: pointer;
+        }
+        .drink .addBtn:hover {
+            background-color: rgb(223, 39, 39);
+        }
+
+        .drink img {
+            float: right;
+            padding : 10px;
+            width : 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+        .drink {
+            display: block;
+        }
+        .drink p {
+            clear: both;
+            text-align: right;
+        }        
+        .cart ul {
+            text-align: left;
+            display: inline-block;
+            
+        }
+        .cart ul li{
+            height: 50px;
+            width: 100%;
+            display: inline-block;
+        }
+        li:nth-child(odd){
+            background-color: rgb(233, 233, 128);
+        }
+        #result {
+            margin : 20px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: -50px;
+            transform: translateY(20%);
+            left: 0;
+            width: 100%;
+            height: 50px;
+        }
+
+        .footerText{
+            padding : 5px;
+            background-color: rgb(236, 234, 122);
+            font-size: 10px;
+            line-height: 10px;
+        }
+        .footerText a{
+            text-decoration-line: underline;
+            color : blue;
+        }
+        .footerText a:hover{
+            color : red;
+        }
+
+    </style>
+
+
+    <!-- <nav class = "float-container fixed-top" >
+        <a href="main.html" class="left width-25 text-center bg-yellow"> <i class="fa-solid fa-house"></i> </a>
+    </nav> -->
+
+    <nav class = "float-container fixed-top" >
+        <a href="main.html" class="left width-20 text-center bg-yellow"> 홈 </a>
+        <a href="main.html#about" class="left width-20 text-center bg-yellow"> 소개 </a>
+        <a href="main.html#pet" class="left width-20 text-center bg-yellow"> 동물친구들 </a>
+        <a href="main.html#where" class="left width-20 text-center bg-yellow"> 위치 </a>
+        <a href="#" class="left width-20 text-center bg-yellow"> 예약 </a>
+    </nav>
+
+    <div style="max-width : 700px; margin: 50px auto; padding : 0 15px; ">
+        <br><br>
+        <h3 class="padding-48 text-center">
+            <span class="bg-black" >  &#124; 카페 메뉴</span>        
+        </h3>
+        <br>
+        <div class="menuBtn">
+            <div class="menu-btn-group float-container">
+                <button id="foodBtn" class="left width-50 text-center" onclick="showFood()"><i class="fa-solid fa-utensils"></i>&#160;음식</button>
+                <button id="drinkBtn" class="left width-50 text-center" onclick="showDrink()"><i class="fa-solid fa-mug-hot"></i>&#160;음료</button>
+            </div>
+    </div>
+
+        <div id="foodMenu" class="foods" style="padding : 48px 10px;">
+            <div id="1" class="food">
+                <img src="../final_portfolio/img/food01.jpg" alt="">
+                <p><i class="fa-solid fa-utensils"></i>&#160;딸기 초코 케이크 <br> <i class="fa-solid fa-won-sign"></i>&#160;3000원 <br> <i class="fa-solid fa-cookie"></i>&#160;상큼한 딸기와 달콤묵직한 초코크림이 환상적인 초코케이크</p>
+            </div>
+            <div id="2" class="food">
+                <img src="../final_portfolio/img/food02.jpg" alt="">
+                <p><i class="fa-solid fa-utensils"></i>&#160;미니 과일 컵케이크 <br><i class="fa-solid fa-won-sign"></i>&#160;2000원 <br> <i class="fa-solid fa-cookie"></i>&#160;부드러운 컵케이크 안에 과일과 크림이 가득찬 달콤한 머핀</p>
+            </div>
+            <div id="3" class="food">
+                <img src="../final_portfolio/img/food03.jpg" alt="">
+                <p><i class="fa-solid fa-utensils"></i>&#160;아이싱 진저쿠키 <br> <i class="fa-solid fa-won-sign"></i>&#160;1000원 <br> <i class="fa-solid fa-cookie"></i>&#160;생강향이 감도는 달콤한 과자에 아이싱으로 귀여운 옷을 입힌 진저쿠키</p>
+            </div>
+            <div id="4" class="food">
+                <img src="../final_portfolio/img/food04.jpg" alt="">
+                <p><i class="fa-solid fa-utensils"></i>&#160;초코 르뱅 쿠키 <br> <i class="fa-solid fa-won-sign"></i>&#160;1500원 <br> <i class="fa-solid fa-cookie"></i>&#160;모두가 아는 바로 그 맛. 초코칩이 콕콕 박힌 두툼한 쿠키.</p>
+            </div>          
+        </div>
+
+        <div id="drinkMenu" class="drinks" style="padding : 48px 10px;">
+            <div id="5" class="drink">
+                <img src="../final_portfolio/img/drink01.jpg" alt="">
+                <p><i class="fa-solid fa-mug-hot"></i>&#160;아메리카노 (hot/ice) <br> <i class="fa-solid fa-won-sign"></i>&#160;3500원 <br><i class="fa-solid fa-cookie-bite"></i>&#160;모든 디저트와 잘어울리는 베이직 커피</p>
+            </div>
+            <div id="6" class="drink">
+                <img src="../final_portfolio/img/drink02.jpg" alt="">
+                <p><i class="fa-solid fa-mug-hot"></i>&#160;카페라떼 (hot/ice) <br> <i class="fa-solid fa-won-sign"></i>&#160;4000원 <br><i class="fa-solid fa-cookie-bite"></i>&#160;커피향과 부드러운 맛까지 포기할 수 없다면 이걸로</p>
+            </div>
+            <div id="7" class="drink">
+                <img src="../final_portfolio/img/drink03.jpg" alt="">
+                <p><i class="fa-solid fa-mug-hot"></i>&#160;콜라 <br> <i class="fa-solid fa-won-sign"></i>&#160;1000원 <br> <i class="fa-solid fa-cookie-bite"></i>&#160;느끼할 땐 역시 탄산이지. 당연히 저희는 빨간 콜라만 취급합니다.</p>
+            </div>
+            <div id="8" class="drink">
+                <img src="../final_portfolio/img/drink04.jpg" alt="">
+                <p><i class="fa-solid fa-mug-hot"></i>&#160;생과일주스 (딸기, 레몬, 오렌지, 키위) <br><i class="fa-solid fa-won-sign"></i>&#160;4500원 <br><i class="fa-solid fa-cookie-bite"></i>&#160;엄선하여 고른 신선한 과일을 바로 갈아드립니다.</p>
+            </div>
+    </div>
+
+    <div style="max-width : 700px; margin: auto; padding : 0 15px; ">
+        <br>
+        <div class = "cart" id="root"></div>
+        <br>
+        <button onclick="deleteCart()"><i class="fa-solid fa-trash-can"></i> &#160; 장바구니 비우기 </button>
+        <br>
+
+    <div id="result"></div>
+    
+    <div style="max-width : 700px; margin: auto; padding : 0 15px; ">
+        <br>
+        <h3 class="padding-48 text-center">
+            <span class="bg-black" > &#124; 카페 예약</span>        
+        </h3>
+        <br>
+        <form action="">
+            <div class="form-group">
+                <label for=""></label>
+                <input type="text" class="width-100" placeholder="이름">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="text" class="width-100" placeholder="전화번호">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="number" class="width-100"  placeholder="인원">
+            </div>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="number" class="width-100"  placeholder="동반 펫">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="date" class="width-100"  placeholder=" "> 
+            </div>
+            <br>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="text" class="width-100"  placeholder="메세지 / 요청사항">
+            </div>
+            <br>
+            <div class="form-group">
+                <button class="bg-black" style="padding : 15px;" onclick="sendMsg()"><i class="fa-regular fa-envelope"></i>&#160;메세지 보내기</button>              
+            </div>
+        </form>
+    </div>
+
+    <footer id="footer" class="padding-48" style="margin-top : 50px;">
+        <div class="text-center footerText">
+            <p>사업자번호 : 000-00-00000 대표자 : LYR</p>
+            <p>Copyright&#169; 2022 해피위드펫 애견카페 All Right Reserved</p>
+            <p><a href="mailto:happyPetCafe@cafe.net">e-mail : happyPetCafe@cafe.net</a></p>
+            <p><a href="tel:+3212341234">shop : 032-1234-1234</a></p>
+            <p><a href="tel:+1012341234">phone : 010-1234-1234</a></p>
+        </div>            
+    </footer>        
+
+    <script>
+        var foodBtn=document.getElementById("foodBtn");
+        var drinkBtn=document.getElementById("drinkBtn");
+        var foodMenu = document.getElementById('foodMenu');
+        var drinkMenu = document.getElementById('drinkMenu');
+        
+        console.log(foodMenu);
+        console.log(drinkMenu);
+        console.log(document.getElementById('1'))
+
+        var flagFood=false; 
+        var flagDrink=false;
+        // 두번 클릭 시 메뉴를 보이지 않게 하는 지에 대한 flag
+        
+        function showFood() {
+            // foodMenu.classList.toggle("active")
+            if(!flagFood){
+                for(var i=1; i<5; i++){
+                    document.getElementById(i).style.display='block'
+                }
+                for(var i=5; i<9; i++){
+                    document.getElementById(i).style.display='none'
+                }
+                flagFood=true;         
+            } else {
+                displayMenu()
+                flagFood=false;
+            }
+        }
+
+        function showDrink() {
+            // drinkMenu.classList.toggle("active")
+            if(!flagDrink){
+                for(var i=1; i<5; i++){
+                    document.getElementById(i).style.display='none'
+                }
+                for(var i=5; i<9; i++){
+                    document.getElementById(i).style.display='block'
+                }
+                flagDrink=true;
+            } else {
+                displayMenu()
+                flagDrink=false;
+            }
+        }
+
+        
+        displayMenu();
+        function displayMenu(){            
+            for(var i=1; i<9; i++){
+                document.getElementById(i).style.display='none';
+            }
+        }
+        
+        var DATA = [
+            {id:1, name : '딸기 초코 케이크', cost : 3000},
+            {id:2, name : '미니 과일 컵케이크', cost : 2000},
+            {id:3, name : '아이싱 진저쿠키', cost : 1000},
+            {id:4, name : '초코 르뱅 쿠키', cost : 1500},
+            {id:5, name : '아메리카노', cost : 3500},
+            {id:6, name : '카페라떼', cost : 4000},
+            {id:7, name : '콜라', cost : 1000},
+            {id:8, name : '생과일주스', cost : 4500},
+        ];
+
+    var cafeMenu = [];
+    for(var i=1; i<9; i++) {
+        cafeMenu[i] = document.getElementById(i);
+        // console.log(cafeMenu[i])
+    }
+    var i=1;
+
+    DATA.map(function(item){
+        var p = document.createElement('p');
+        p.innerHTML=`<button class="addBtn" onclick="addToCart(${item.id})"><i class="fa-solid fa-basket-shopping"></i>&#160;addCart</button>`
+        
+        cafeMenu[i].appendChild(p);
+        document.getElementById('root').appendChild(cafeMenu[i])
+        
+        i++;
+    })
+
+
+
+    function addToCart(id) {
+        console.log(id)
+
+        if(localStorage.getItem('cart')===null){        
+            localStorage.setItem('cart','[]')
+        }
+
+        var cart = JSON.parse(localStorage.getItem('cart'));
+
+        var isCart=false; 
+    
+        
+        cart.map(function (item){
+            if(item.id===id) {
+                item.quantity++;
+                isCart=true;
+                alert('장바구니에 상품이 추가되었습니다.');
+            }
+        })
+    
+    
+        if(isCart===false) {            
+            DATA.map(function (data){
+                if(data.id == id){
+                    cart.push({id:data.id, quantity:1});
+                    alert('장바구니에 상품이 추가되었습니다.');
+                }
+            })
+        }
+        localStorage.setItem('cart',JSON.stringify(cart));
+        showCart();
+    }
+    
+    function deleteCart() {
+        localStorage.clear();
+        showCart();
+    }
+
+    function showCart() {
+        console.log(localStorage.length)
+        if(localStorage.length==0){
+            // console.log(localStorage.getItem)
+            document.getElementById('result').replaceChildren(document.createElement('p'));
+            
+        }else {
+
+            var cart = JSON.parse(localStorage.getItem('cart'));
+            var ul = document.createElement('ul');
+            var allCost=0;    //장바구니 총 구매 가격을 담을 변수
+
+            DATA.map(function(data){ //데이터 중에서 (데이터의 수만큼 반복)
+                cart.map(function(item){ // 내 카트에 있는 것만 가져오기 (카트의 수만큼 반복)
+
+                    if(data.id===item.id){
+                        console.log(item)    
+                        var li = document.createElement('li')
+                        li.innerHTML = `상품명 : ${data.name}, 수량 : ${item.quantity}, 가격 : ${data.cost* item.quantity}원`
+                        
+                        // 장바구니에 담긴 상품들의 가격을 변수 선언해서 넣어줌
+                        var cost = data.cost*item.quantity;
+                        allCost+=cost;              
+                        console.log(allCost)
+                        ul.appendChild(li)
+                      
+                    }
+                })
+            })
+            var allCostli=document.createElement('li')
+            allCostli.innerHTML=`총 가격 : ${allCost}원`
+            ul.appendChild(allCostli)
+            document.getElementById('result').replaceChildren(ul);
+        }
+
+    }
+
+    function sendMsg(){
+        alert('예약이 완료되었습니다.')
+    }   
+
+    </script>
+</body>
+</html>

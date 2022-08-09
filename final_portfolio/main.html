@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy With Pet Cafe</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/010d46e4b1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <style>
+
+        body {
+            position : relative;
+        }
+
+        body::after {
+            content: '';
+            display: block;
+            height: 50px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    
+        .bg-yellow {
+            border-radius: 10px;
+            padding : 5px;
+            color : #fff;
+            opacity : 0.9;
+        }
+        
+        nav {
+            padding : 10px;
+            background-color: rgba(204, 170, 58, 0.8);
+        }
+    
+        nav a:hover {
+            background-color: #fff;
+            color : rgb(141, 139, 10);
+        }
+    
+        .bg-img .left-text{
+            background-color: rgba(219, 219, 190,0.3);
+            color : #fff;
+            bottom : 15px;
+            left : 15px;
+            /* display : none; */
+        }
+    
+        .bg-img .right-text{
+            background-color: rgba(219, 219, 190,0.3);
+            color : #fff;
+            bottom : 15px;
+            right : 15px;
+        }
+        .bg-text {
+            min-width: 345px;
+            border-top: 5px solid #fff;
+            border-bottom: 5px solid #fff;
+            padding : 0 5px 0 5px;
+            background-color: rgba(0, 0, 0, 0.3);
+            color :rgb(141, 139, 10);
+            text-align: center;
+            
+        }
+
+        .cafeImgs {
+            /* border : 3px dashed; */
+            width : 450px;
+            height : 400px;
+            position : relative;
+            left : 15%;
+        }
+
+        .cafeImgs img  {
+            width : 100%;
+            height : 100%;
+            object-fit: cover;
+            position : absolute;
+            transition: 1s;
+            border-radius: 20px;
+        }
+        .dots{
+            margin-top: 10px;
+            margin-left: 45%;
+            /* border : 3px dashed; */
+            /* position : absolute; */
+        }
+        .dot {
+            width : 12px;
+            height : 12px;
+            background-color: #ddd;
+            border-radius: 50%;
+            display : inline-block;
+        }
+        .active {
+            background-color: rgb(214, 179, 21);
+        }
+
+        button {
+            width : 100%;
+            cursor: pointer;
+            border : none;
+        }
+        button:hover {
+            background-color: rgb(231, 230, 130);
+        }
+    
+        .thumbnail {
+                width : 200px;
+                height : 200px;
+                object-fit: cover;
+                opacity : 0.8;
+                transition: 0.5s;
+                cursor: pointer;
+                border-radius: 10px;
+        }
+        .thumbnail:hover {
+            opacity : 1;
+        }
+        .layer {
+            position : fixed;
+            top :0;
+            left : 0;
+            width : 100%;
+            height : 100%;
+            background-color: rgba(0,0,0,0.8);
+            display : none;
+        }
+        .container {
+            /* border : 3px dashed #fff; */
+            position : fixed;
+            top : 20%;
+            left : 50%;
+            transform: translateX(-50%);
+            width : 350px;
+            height : 300px;
+            display : none;
+        }
+        .container img {
+            width : 100%;
+            height : 100%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .prev, .next {
+            position : absolute;
+            top : 50%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            border : none;
+            background-color: rgba(255,255,255,0.3);
+            width : 25px;
+            height : 25px; 
+            cursor : pointer;
+            padding : 0;
+        }
+        .prev {
+            left : -40px;
+        }
+        .next {
+            right : -40px;
+        }
+        .close-btn {
+            position : absolute;
+            font-size: 30px;
+            color : white;
+            top : -20px;
+            right : -40px;
+            cursor: pointer;
+        }
+        .petTextBox{
+            background-color: rgba(189, 187, 117,0.8);
+            border-radius: 10px;
+            padding : 5px;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        .container .takeHome{
+            border : none;
+            position : absolute;
+            background-color: rgba(247, 188, 60, 0.8);
+            border-radius: 10px;
+            margin : 2px;
+        }
+        .container .takeHome:hover{
+            background-color: rgba(247, 186, 228, 0.8);
+            color : #000;
+        }
+        .footerText{
+            padding: 3px;
+            background-color: rgb(236, 234, 122);
+            font-size: 10px;
+            line-height: 10px;
+        }
+        .footerText a{
+            text-decoration-line: underline;
+            color : blue;
+        }
+        .footerText a:hover{
+            color : red;
+        }
+        
+        .post-it{
+            text-align: center;
+        }
+
+        .reservation {
+            border-radius: 10px;
+        }
+    
+    </style>
+    
+    <body>
+    
+    <!-- 홈페이지 상단 메뉴바 -->
+    <nav class = "float-container fixed-top" >
+        <a href="#" class="left width-20 text-center bg-yellow"> 홈 </a>
+        <a href="#about" class="left width-20 text-center bg-yellow"> 소개 </a>
+        <a href="#pet" class="left width-20 text-center bg-yellow"> 동물친구들 </a>
+        <a href="#where" class="left width-20 text-center bg-yellow"> 위치 </a>
+        <a href="reservation.html" class="left width-20 text-center bg-yellow"> 예약 </a>
+    </nav>
+    
+        <!-- 홈페이지 메인 이미지 -->
+        <div class="bg-img" style="background-image: url('../final_portfolio/img/petCafe.jpg');">
+            <div class="bg-text">
+                <h1 style = "font-size : 60px; color : rgb(255, 255, 255);">
+                    Happy With <br> Pet Cafe
+                </h1>
+            </div>
+            <span class="left-text absolute" > 영업 시간 : 오전 9시 - 오후 7시 </span>
+            <span class="right-text absolute "> 인천 중구 </span>
+        
+        </div>
+    
+        <!-- 카페 소개 -->
+    <div id="about" style="max-width : 700px; margin: auto; padding : 0 15px; ">
+        <br>
+        <h3 class="padding-48">
+            <span>&#124;&#160;카페 소개</span>            
+        </h3> 
+        <p><i class="fa-solid fa-paw"></i> &#160;Happy With Pet Cafe는 여러분의 반려동물과 함께 즐거운 시간을 보낼 수 있는 <br> 아늑한 공간으로 가꾸어져 있습니다.</p>
+        <p><i class="fa-solid fa-paw"></i>&#160;여러분들을 위한 음료와 음식은 물론, 동물친구들을 위한 간식들도 준비되어 있으니 <br> 카운터에서 주문해주시기 바랍니다.</p>
+        <p><i class="fa-solid fa-paw"></i>&#160;1인 1음료 주문시 반려동물 기호에 맞는 간식을 서비스로 제공해드립니다.</p>
+        <p><i class="fa-solid fa-paw"></i>&#160;카페에서 위탁 중인 동물친구들은 언제나 당신의 가족이 될 준비가 되어있습니다. <br> 또한 그 아이들은 휴식을 즐기러 온 당신의 반려동물의 훌륭한 친구가 되어 줄 것입니다.</p>
+        <br>
+        <div class="cafeImgs">
+            <img src="../final_portfolio/img/petCafe04.jpg" alt="" class="cafeImg">
+            <img src="../final_portfolio/img/petCafe03.jpg" alt="" class="cafeImg">
+            <img src="../final_portfolio/img/petCafe05.jpg" alt="" class="cafeImg">
+            <img src="../final_portfolio/img/petCafe06.jpg" alt="" class="cafeImg">
+        </div>
+        <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <div class="post-it">
+            <p><q>고양이의 사랑을 받는 것보다 더 큰 선물은 없다.</q>- 레오나르도 다빈치</p>
+            <p><q>개는 자신보다 당신을 더 사랑하는 이 세상의 유일한 생명체일 것이다.</q>- 조쉬 빌링스</p>
+        </div>           
+
+        <br>
+        <div id="pet" style="max-width : 700px; margin: auto; padding : 0 15px; ">
+            <h3 class="padding-48">
+                <span>&#124;&#160;카페 동물 친구들</span>            
+            </h3>
+            <br>
+            <div class="thumbnails">
+                <img src="../final_portfolio/img/cat01.jpg" alt="" class="thumbnail" onclick="jumpTo(0); showText(0);">
+                <img src="../final_portfolio/img/cat02.jpg" alt="" class="thumbnail" onclick="jumpTo(1); showText(1);">
+                <img src="../final_portfolio/img/cat03.jpg" alt="" class="thumbnail" onclick="jumpTo(2); showText(2);">
+                <img src="../final_portfolio/img/cat04.jpg" alt="" class="thumbnail" onclick="jumpTo(3); showText(3);">
+                <img src="../final_portfolio/img/dog01.jpg" alt="" class="thumbnail" onclick="jumpTo(4); showText(4);">
+                <img src="../final_portfolio/img/dog02.jpg" alt="" class="thumbnail" onclick="jumpTo(5); showText(5);">
+                <img src="../final_portfolio/img/dog03.jpg" alt="" class="thumbnail" onclick="jumpTo(6); showText(6);">
+                <img src="../final_portfolio/img/dog04.jpg" alt="" class="thumbnail" onclick="jumpTo(7); showText(7);">
+                <img src="../final_portfolio/img/petHouse.png" alt="" class="thumbnail" onclick="jumpTo(8); showText(8)">
+            </div>
+        
+            <div class="layer"></div>
+        
+            <div class="container">
+                <img src="" alt="" id="display-img">
+                <div class="petTextBox" id="petTextBox"></div>
+                <span id="close-btn" class="close-btn">&times;</span>
+                <span><button class="takeHome" onclick="callMe()"><i class="fa-solid fa-hand-holding-heart"></i>&#160;</i>입양하기</button></span>
+                <!-- 입양하기 클릭시 iframe으로 창 나타나게 하기..? -->
+                <div class="nav">
+                    <button class="prev" onclick="navigateTo(-1); movePetText(-1);">&#10094;</button>
+                    <button class="next" onclick="navigateTo(1); movePetText(1);">&#10095;</button>
+                </div>
+            </div>
+            
+            <br>
+            <p><b>&#124;&#160;주의 사항</b><ul>
+                <li><i class="fa-solid fa-paw">&#160;</i>억지로 동물친구들을 들어올리거나 안지 말아주세요. 스트레스 받아요.</li>
+                <li><i class="fa-solid fa-paw">&#160;</i>사람이 먹는 음식을 주지 마세요. 탈나고 아파요.</li>
+                <li><i class="fa-solid fa-paw">&#160;</i>소지품 보관함을 이용해주세요. 낯선 물건들이라 친구들이 실례할 수 있어요.</li>
+                <li><i class="fa-solid fa-paw">&#160;</i>자고 있는 친구들을 깨우지 말아주세요.</li>
+            </ul></p>
+        </div>
+
+    
+        <!-- Where, 카페 위치 -->
+    <div id="where" style="max-width: 700px; margin:auto; padding : 0 15px;">
+        <h3 class="padding-48">
+            <br>
+            <span>&#124;&#160;카페 위치</span> 
+        </h3>
+        <br>
+        <img style="margin: 10px;"src="../final_portfolio/img/map.png" alt="">
+        <p><b>&#124;&#160;주소 : </b>인천 광역시 중구 숲쟁이로도비 공원 176-15 501-503호</p>
+        <p><b>&#124;&#160;위치 : </b>동그란 공원 12시 방향의 오른쪽 노란색 상가 건물 5F , Happy With Pet Cafe</p>
+        <p><b>&#124;&#160;영업 시간</b> : 매주 월 - 토 , 오전 9시 - 오후 7시</p>
+        <p><b>&#124;&#160;주차장 : </b>건물 지하 1층 / 카페 이용 시 3시간 무료</p>
+    
+    </div>
+    <br>
+    
+        <!-- 예약안내버튼 >> 페이지 이동 
+        구현해야 할 것 : 메뉴 장바구니에 넣기 , 예약 폼 넣기.-->
+        <div id="reservation" style="max-width: 700px; margin:auto; padding : 0 15px;">
+            <h3 class="padding-48">
+                <span>&#124;&#160;카페 방문 예약</span>            
+            </h3>
+            <br>
+            <button class="reservation" onclick="location.href='reservation.html'"> 바로가기 </button>
+        </div>
+        <br><br>
+    
+        <footer class="padding-48" style="margin-top : 50px;">
+            <div class="text-center footerText">
+                <p>사업자번호 : 000-00-00000 대표자 : LYR</p>
+                <p>Copyright&#169; 2022 해피위드펫 애견카페 All Right Reserved</p>
+                <p><a href="mailto:happyPetCafe@cafe.net">e-mail : happyPetCafe@cafe.net</a></p>
+                <p><a href="tel:+3212341234">shop : 032-1234-1234</a></p>
+                <p><a href="tel:+1012341234">phone : 010-1234-1234</a></p>
+            </div>
+            
+        </footer>
+
+        <script>
+            var container = document.querySelector('.container');
+            var thumbnails = document.querySelectorAll('.thumbnail');
+            var displayImg=document.getElementById('display-img');
+            var layer = document.querySelector('.layer');
+            var prevBtn = document.querySelector('.prev');
+            var nextBtn = document.querySelector('.next');
+            var closeBtn=document.getElementById('close-btn');
+            var petTextBox=document.getElementById('petTextBox');
+
+            var cafeImgs = document.querySelectorAll('.cafeImg');
+            var dots = document.querySelectorAll('.dot')
+            // console.log(cafeImgs)
+
+            // 카페 이미지 자동 슬라이드 메소드
+            var imgIndex=0;
+            function roop() {
+                cafeImgs.forEach(function(img) {
+                    img.style.opacity = 0;
+                })
+                dots.forEach(function(dot){
+                    dot.classList.remove('active');
+                })
+                cafeImgs[imgIndex].style.opacity=1;
+                dots[imgIndex].classList.add('active');
+                imgIndex++;
+                if(imgIndex>=cafeImgs.length){
+                    imgIndex=0;
+                }
+            }
+        setInterval(roop,2000);
+    
+            var petText = [
+                {name:'고냥이', cha : '활발하고 호기심이 많음', fav : '닭고기맛 츄르'},
+                {name:'시옷이', cha : '조용하고 상냥함', fav : '오뎅꼬치 장난감'},
+                {name:'백설이', cha : '조심성이 많음. 사고뭉치', fav : '참치캔'},
+                {name:'샴이', cha : '사람을 좋아하고 애교가 많음', fav : '모형 나비 장난감'},
+                {name:'솜사탕', cha : '잠이 많고 느긋함', fav : '오리뼈 간식'},
+                {name:'백구', cha : '장난끼가 많고 활동적임', fav : '소리나는 공'},
+                {name:'도비', cha : '소심하지만 장난끼가 많음', fav : '소고기맛 개껌'},
+                {name:'보리꼬리', cha : '영리하고 사람을 좋아함', fav : '터그놀이'},
+                {name:'보호중인 동물친구들의', cha : '입양문의는', fav : '언제든지 환영합니다'}
+            ];
+    
+            // console.log(petText[0]);
+            // console.log(thumbnails)
+    
+            var index = 0;
+    
+            // 이미지 클릭시 선택한 사진 index에 맞춰 설명 나오도록 하는 함수
+            function showText(data){
+                var ul = document.createElement('ul')
+                var li = document.createElement('li')
+                if(index>=0 && index<8) {
+                    li.innerHTML = `<i class="fa-solid fa-paw">&#160;</i> 이름 : ${petText[index].name}<br><i class="fa-solid fa-paw">&#160;</i> 성격 : ${petText[index].cha}<br><i class="fa-solid fa-paw">&#160;</i> 좋아하는 것 : ${petText[index].fav}`
+                } else {
+                    li.innerHTML = `<i class="fa-solid fa-paw">&#160;</i>${petText[index].name}<br><i class="fa-solid fa-paw">&#160;</i>${petText[index].cha}<br><i class="fa-solid fa-paw">&#160;</i>${petText[index].fav}`
+                }            
+                ul.appendChild(li);
+                petTextBox.replaceChildren(ul)
+            }
+    
+    
+            // 해당 이미지 클릭 후 <,>로 이동시에도 text 보이게 하기
+            function movePetText(data){
+                var ul = document.createElement('ul')
+                var li = document.createElement('li')
+                if(index>=0 && index<8) {
+                    li.innerHTML = `<i class="fa-solid fa-paw">&#160;</i> 이름 : ${petText[index].name}<br><i class="fa-solid fa-paw">&#160;</i> 성격 : ${petText[index].cha}<br><i class="fa-solid fa-paw">&#160;</i> 좋아하는 것 : ${petText[index].fav}`
+                } else {
+                    li.innerHTML = `<i class="fa-solid fa-paw">&#160;</i>${petText[index].name}<br><i class="fa-solid fa-paw">&#160;</i>${petText[index].cha}<br><i class="fa-solid fa-paw">&#160;</i>${petText[index].fav}`
+                }
+                ul.appendChild(li);
+                petTextBox.replaceChildren(ul)
+            }
+    
+            // <,> 버튼 누를 시 이미지 변경
+            function navigateTo(data){
+                index +=data;
+                console.log(index) 
+                getSrc(thumbnails[index].src);
+                hideButton();
+            }
+    
+            // 이미지 클릭시 섬네일 확대
+            function jumpTo(data){
+                index = data;
+                console.log(index) //클릭한 이미지 인덱스를 잘 받아오는지 확인
+    
+                getSrc(thumbnails[index].src)
+                
+                container.style.display = 'block'
+                layer.style.display = 'block'
+                hideButton();
+            }
+            
+            function getSrc(src) {
+                displayImg.setAttribute('src',src)
+            }
+            function hideButton() {
+                prevBtn.style.display='block';
+                nextBtn.style.display='block';
+                if(index===0){
+                    prevBtn.style.display='none';
+                }
+                if (index===thumbnails.length-1) {
+                    nextBtn.style.display='none';
+                }
+            }
+    
+            layer.addEventListener('click',function(e){
+                layer.style.display = 'none';
+                container.style.display = 'none';
+            })
+    
+            closeBtn.addEventListener('click',function(e){
+                layer.style.display = 'none';
+                container.style.display = 'none';
+            })
+            function callMe(){
+                alert('초코톡 아이디 : HappyWithPatter \nHp : 010-1234-1234\n입양문의는 언제든지 편하게 연락 주시기 바랍니다!')
+            }
+        </script>
+    
+</body>
+</html>

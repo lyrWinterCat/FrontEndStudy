@@ -1,0 +1,710 @@
+    <!-- <style>
+        .thumbnail {
+            width : 100px;
+            height : 100px;
+            object-fit : cover;
+            opacity : 0.8;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+        .thumbnail:hover {
+            opacity : 1;
+        }
+
+        .layer {
+            position : fixed;
+            top : 0;
+            left : 0;
+            width : 100%;
+            height : 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: none;
+        }
+        .container {
+            position : fixed;
+            top : 50%;
+            left : 50%;
+            transform: translate(-50%,-50%);
+            width : 400px;
+            display : none;
+        }
+        .container img {
+            /* 부모 콘테이너 안으로 딱 들어갈 수 있게 조절 */
+            width : 100%;
+        }
+        .close-btn {
+            position : absolute;
+            color : #fff;
+            top : -50px; right : 0;
+            font-size: 40px;
+            cursor : pointer;
+        }
+
+    </style>
+
+    <img src="../img/hot.jpg" alt="" class="thumbnail">
+    <img src="../img/tea1.jpg" alt="" class="thumbnail">
+    <img src="../img/tea2.jpg" alt="" class="thumbnail">
+
+    background layer (배경 레이어) 
+    <div id="layer" class="layer"></div>
+
+    display image (디스플레이 이미지) 
+    <div id="container" class="container">
+        <span id = "close-btn" class="close-btn">&times;</span>
+        <img id="modal-img" src="" alt="">
+    </div>
+
+    <script>
+        var thumbnails = document.querySelectorAll('.thumbnail')
+        var modalImg = document.getElementById('modal-img')
+        var container = document.getElementById('container')
+        var layer = document.getElementById('layer')
+        // var closeBtn = document.getElementById('close-btn') //아이디를 줄거면 이걸로
+        var closeBtn = document.querySelector('.close-btn') //클래스명으로 접근하려면 이걸로
+
+        thumbnails.forEach(function (thumbnail){
+            console.log(thumbnail)
+
+            thumbnail.addEventListener('click',function(){
+                // 방법 1
+                // modaiImg.scr = thumbnail.src;
+
+                //방법 2 getAttribute(attribute)
+                // modalImg.src = thumbnail.getAttribute('src');
+
+                //  방법 3 setAttribute(attribute, element attribute)
+                // 앞의 src를 뒤의 인자로 하겠다~~ 
+                modalImg.setAttribute('src', thumbnail.getAttribute('src'));
+
+                console.log(modalImg.src)
+
+                layer.style.display = 'block';
+                container.style.display = 'block';
+            })
+        })
+
+        
+        layer.addEventListener('click',function(){
+            layer.style.display = 'none';
+            container.style.display = 'none';
+        })
+        
+        //^^ 아이디로 연결할꺼야. 클래스명으로 연결안해
+        closeBtn.addEventListener('click',function(){
+            layer.style.display = 'none';
+            container.style.display = 'none';
+        })
+
+        // 함수로 정리하고싶은데 되나...이게...
+        // function disappear(none) {
+        //     layer.style.display = 'none';
+        //     container.style.display = 'none'
+        // }
+
+    </script> -->
+
+        <!-- <style>
+        .thumbnail {
+            width : 100px;
+            height : 100px;
+            object-fit: cover;
+            opacity : 0.8;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+        .thumbnail:hover {
+            opacity : 1;
+        }
+        .layer {
+            position : fixed;
+            top :0;
+            left : 0;
+            width : 100%;
+            height : 100%;
+            background-color: rgba(0,0,0,0.8);
+            display : none;
+        }
+        .container {
+            /* border : 3px dashed #fff; */
+            position : fixed;
+            top : 50px;
+            left : 50%;
+            transform: translateX(-50%);
+            width : 350px;
+            height : 300px;
+            display : none;
+        }
+        .container img {
+            width : 100%;
+            height : 100%;
+            object-fit: cover;
+        }
+        .prev, .next {
+            position : absolute;
+            top : 50%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            border : none;
+            background-color: rgba(255,255,255,0.3);
+            color : #fff;
+            width : 25px;
+            height : 25px; 
+            cursor : pointer;
+        }
+        .prev {
+            left : -40px;
+        }
+        .next {
+            right : -40px;
+        }
+
+        .close-btn {
+            position : absolute;
+            color : #fff;
+            top : -35px; right : -25px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+
+
+    <div class="thumbnails">
+        <img src="../img/spring.jpg" alt="" class="thumbnail" onclick="jumpTo(0)">
+        <img src="../img/summer.jpg" alt="" class="thumbnail" onclick="jumpTo(1)">
+        <img src="../img/autumn.jpg" alt="" class="thumbnail" onclick="jumpTo(2)">
+        <img src="../img/winter.jpg" alt="" class="thumbnail" onclick="jumpTo(3)">
+    </div>
+
+    <div class="layer"></div>
+
+    <div class="container">
+        <img src="" alt="" id="display-img">
+        <span class="close-btn">&times;</span>
+        <div class="nav">
+            <button class="prev" onclick="navigateTo(-1)">&#10094;</button>
+            <button class="next" onclick="navigateTo(1)">&#10095;</button>
+        </div>
+    </div>
+
+    <script>
+        var container = document.querySelector('.container');
+        var thumbnails = document.querySelectorAll('.thumbnail');
+        var displayImg=document.getElementById('display-img');
+        var layer = document.querySelector('.layer');
+        var prevBtn = document.querySelector('.prev');
+        var nextBtn = document.querySelector('.next');
+        var closeBtn=document.querySelector('.close-btn')
+
+        console.log(thumbnails)
+
+        var index = 0;
+
+        function navigateTo(data){
+            index +=data;
+            console.log(index) // 버튼을 눌렀을 시 index가 잘 바뀌는지 확인
+
+            getSrc(thumbnails[index].src);
+            
+            //버튼 toggle 함수 실행
+            hideButton();
+        }
+
+        function jumpTo(data){
+            index = data;
+            console.log(index) //클릭한 이미지 인덱스를 잘 받아오는지 확인
+
+            // 이미지의 src를 전달한다
+            getSrc(thumbnails[index].src) //클릭한 이미지의 인덱스를 기반으로 src 받아옴
+            //컨테이너와 레이어를 보이게 함
+            container.style.display = 'block'
+            layer.style.display = 'block'
+
+            //버튼 toggle 함수 실행
+            hideButton();
+        }
+        //모달이미지의 주소를 설정한다
+        function getSrc(src) {
+            displayImg.setAttribute('src',src)
+        }
+        function hideButton() {
+            prevBtn.style.display='block';
+            nextBtn.style.display='block';
+            if(index===0){
+                prevBtn.style.display='none';
+            }
+            if (index===thumbnails.length-1) {
+                nextBtn.style.display='none';
+            }
+        }
+
+        // //레이어 클릭시 이미지 사라지게 해보기
+        layer.addEventListener('click',function(e){
+            layer.style.display = 'none';
+            container.style.display = 'none';
+        })
+        
+        // x 버튼 만들어서 레이어, 이미지 사라지게 해보기(close-btn)
+ 
+        closeBtn.addEventListener('click',function(e){
+            layer.style.display = 'none';
+            container.style.display = 'none';
+        })
+
+    </script> -->
+
+    <!-- <style>
+        .container {
+            /* border : 3px dashed; */
+            width : 350px;
+            height : 350px;
+            position : relative;
+        }
+        .container img  {
+            width : 100%;
+            height : 100%;
+            object-fit: cover;
+            position : absolute;
+            transition: 1s;
+        }
+    </style>
+
+    <div class="container">
+        <img src="../img/cake1.jpg" alt="" id="mainImage">
+    </div>
+
+    <script>
+        var myImage=document.getElementById('mainImage');
+        var imgAr = ['../img/cake2.jpg','../img/cake3.jpg','../img/cake4.jpg','../img/cake5.jpg'];
+        var imgIndex=0;
+
+        function changeImage(){
+            myImage.setAttribute("src",imgAr[imgIndex]);
+            imgIndex++;
+            if(imgIndex>=imgAr.length){
+                imgIndex=0;
+            }
+        }
+        setInterval(changeImage,1000);
+    </script> -->
+
+<!-- <script>
+    var index=-1;
+    setInterval(navigateTo,1000)
+
+    navigateTo()
+    
+    function navigateTo (){
+        index++;
+
+        console.log(index)
+        if(index===3) {
+            index=0;
+        }
+    }
+</script> -->
+
+
+
+    <!-- <style>
+        .container {
+            /* border : 3px dashed; */
+            width : 350px;
+            height : 350px;
+            position : relative;
+        }
+        .container img  {
+            width : 100%;
+            height : 100%;
+            object-fit: cover;
+            position : absolute;
+            transition: 1s;
+        }
+        /* >> 여러개의 이미지 container 공간에 겹치도록 position 주기 */
+
+        .dots{
+            position : absolute;
+            top : 20px;
+            left : 155px;
+            /* text-align: left; */
+
+        }
+        .dot {
+            width : 10px;
+            height : 10px;
+            background-color: #ddd;
+            border-radius: 50%;
+
+            display : inline-block;
+            /* inline은 width와 height를 설정할 수 없다.  */
+            /* 또한 위아래 padding과 margin을 설정할 수 없다 */
+
+        }
+        .active {
+            background-color: #888;
+        }
+    </style>
+
+    <div class="container">
+        <img src="../img/dog1.jpg" alt="">
+        <img src="../img/dog2.jpg" alt="">
+        <img src="../img/dog3.jpg" alt="">
+        <img src="../img/dog4.jpg" alt="">
+    </div>
+    <div class="nav">
+        <button class="prev" onclick="navigateTo(-1)">prev</button>
+        <button class="next" onclick="navigateTo(1)">next</button>
+    </div>
+
+    <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <script>
+
+    var imgs = document.querySelectorAll('img')
+        var prevBtn = document.querySelector('.prev')
+        var nextBtn = document.querySelector('.next')
+        var dots = document.querySelectorAll('.dot')
+
+        index = 0;
+
+        function navigateTo(data) {
+            index += data;
+            console.log(index)
+
+            imgs.forEach(function(img) {
+                img.style.opacity = 0;
+            })
+
+            imgs[index].style.opacity=1;
+
+            hideButton()
+        }
+
+        function hideButton() {
+            prevBtn.style.display='inline-block';
+            nextBtn.style.display='inline-block';
+            if(index===0) {
+                prevBtn.style.display='none';
+            }
+            if (index===imgs.length-1) {
+                nextBtn.style.display='none';
+            }
+        }
+
+        dots.forEach(function(dot){
+                dot.classList.remove('active');
+            })
+            dots[index].classList.add('active');
+
+        navigateTo(0) -->
+<!-- 
+        // setInterval (callback, s)
+        // s초 간격마다 반복적으로 실행된다.
+        // setInterval(function(){
+        //     console.log('hello')
+        // },1000)
+        // >> 이걸 만들어서 자동 슬라이드를 만들어보기
+
+        // 인자가 없는 경우
+        // function myFunction(){
+        //     console.log('hello')
+        // }
+        // setInterval(myFunction,1000)
+
+        // 인자가 있는 경우
+        // function myFunction(data){
+        //     console.log(data)
+        // }
+        // setInterval(function(){
+        //     myFunction('hello')
+        // },1000)
+
+        //내가 한 거
+        // var imgIndex=0;
+        // function roop() {
+        //     imgs.forEach(function(img) {
+        //         img.style.opacity = 0;
+        //     })
+        //     dots.forEach(function(dot){
+        //         dot.classList.remove('active');
+        //     })
+        //     imgs[imgIndex].style.opacity=1;
+        //     dots[imgIndex].classList.add('active');
+        //     imgIndex++;
+        //     if(imgIndex>=imgs.length){
+        //         imgIndex=0;
+        //     }
+        // }
+        // setInterval(roop,1000);
+
+    </script> -->
+    <!-- <style>
+        .container {
+            /* border : 3px dashed; */
+            width : 350px;
+            height : 350px;
+            position : relative;
+        }
+        .container img  {
+            width : 100%;
+            height : 100%;
+            object-fit: cover;
+            position : absolute;
+            transition: 1s;
+        }
+
+    </style>
+    <div class="container">
+        <img src="../img/dog1.jpg" alt="" class="img">
+        <img src="../img/dog2.jpg" alt="" class="img">
+        <img src="../img/dog3.jpg" alt="" class="img">
+        <img src="../img/dog4.jpg" alt="" class="img">
+    </div>
+
+    <script>
+        var imgs = document.querySelectorAll('img');
+        var index=-1;
+
+        setInterval(navigateTo,2000)
+        navigateTo()
+        function navigateTo(){
+            index++;
+
+            if(index===3){
+                index=0;
+            }
+            console.log(index)
+        }
+
+        //모든 이미지를 안보이게 한다
+        imgs.forEach(function(img){
+            img.style.display='none'
+        })
+        //index에 해당하는 이미지만 보이게 한다.
+        imgs[index].style.display='block';
+
+    </script> -->
+
+    <!-- 이미지 1:1 비율 반응형 만들기 (이미지 여러개) -->
+    <!-- <style>
+        .container {
+            overflow: auto;
+        }
+        img {
+            width : 33.33333%;
+            float: left;
+            object-fit: cover;
+            padding : 2px;
+            box-sizing: border-box;
+        }
+    </style>
+    <div class="container">
+        <img src="../img/cat1.jpg" alt="">
+        <img src="../img/cat2.jpg" alt="">
+        <img src="../img/cat3.jpg" alt="">
+    </div>
+
+    <div class="container">
+        <img src="../img/dog1.jpg" alt="">
+        <img src="../img/dog2.jpg" alt="">
+        <img src="../img/dog3.jpg" alt="">
+    </div>
+    <div class="container">
+        <img src="../img/cat4.jpg" alt="">
+        <img src="../img/dog4.jpg" alt="">
+        <img src="../img/cat5.jpg" alt="">
+    </div>
+
+    <script>
+        var imgs = document.querySelectorAll('img');
+
+        // console.log(imgs)
+
+        //페이지가 load(refresh)되었을 때
+        imgs.forEach(function(img){
+            img.style.height = img.offsetWidth+'px';
+        })
+        //브라우저의 크기가 재조정될 때
+        window.addEventListener('resize', function(){ //맨 앞 window는 생략 가능
+            imgs.forEach(function(img){
+                img.style.height = img.offsetWidth+'px';
+            })
+        })
+
+    </script> -->
+
+
+
+
+    <!-- <style>
+        .container {
+            /* border : 3px dashed; */
+            width : 350px;
+            height : 350px;
+            position : relative;
+        }
+        .container img  {
+            width : 100%;
+            height : 100%;
+            object-fit: cover;
+            position : absolute;
+            transition: 1s;
+        }
+        /* >> 여러개의 이미지 container 공간에 겹치도록 position 주기 */
+
+        .dots{
+            position : absolute;
+            top : 20px;
+            left : 155px;
+            /* text-align: left; */
+
+        }
+        .dot {
+            width : 10px;
+            height : 10px;
+            background-color: #ddd;
+            border-radius: 50%;
+
+            display : inline-block;
+            /* inline은 width와 height를 설정할 수 없다.  */
+            /* 또한 위아래 padding과 margin을 설정할 수 없다 */
+
+        }
+        .active {
+            background-color: #888;
+        }
+    </style>
+
+    <div class="container">
+        <img src="../img/dog1.jpg" alt="">
+        <img src="../img/dog2.jpg" alt="">
+        <img src="../img/dog3.jpg" alt="">
+        <img src="../img/dog4.jpg" alt="">
+    </div>
+    <div class="nav">
+        <button class="prev" onclick="navigateTo(-1)">prev</button>
+        <button class="next" onclick="navigateTo(1)">next</button>
+    </div>
+
+    <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <script>
+        var imgs = document.querySelectorAll('img')
+        var prevBtn = document.querySelector('.prev')
+        var nextBtn = document.querySelector('.next')
+        var dots = document.querySelectorAll('.dot')
+    
+        index = 0;
+        function navigateTo(data) {
+            index += data;
+            console.log(index)
+
+            if(index>=0) {
+                imgs.forEach(function(img) {
+                    img.style.opacity = 0;
+                })
+                if(index%4==0){
+                    imgs[index%4].style.opacity=1;
+                }else if(index%4==1){
+                    imgs[index%4].style.opacity=1;
+                }else if(index%4==2){
+                    imgs[index%4].style.opacity=1;
+                }else {
+                    imgs[index%4].style.opacity=1;
+                }
+
+            }
+            if(index<=0) {
+                imgs.forEach(function(img){
+                    img.style.opacity=0;
+                })
+                if(index%4==0){
+                    imgs[-index%4].style.opacity=1;
+                }else if(index%4==1){
+                    imgs[-index%4].style.opacity=1;
+                }else if(index%4==2){
+                    imgs[-index%4].style.opacity=1;
+                }else {
+                    imgs[-index%4].style.opacity=1;
+                }
+            }
+
+
+            dots.forEach(function(dot){
+                dot.classList.remove('active');
+            })
+            if(index>=0){
+                if(index%4==0){
+                    dots[index%4].classList.add('active');
+                }else if(index%4==1){
+                    dots[index%4].classList.add('active');
+                }else if(index%4==2){
+                    dots[index%4].classList.add('active');
+                }else {
+                    dots[index%4].classList.add('active');
+                }                
+            }
+            if(index<0){
+                if(index%4==0){
+                    dots[-index%4].classList.add('active');
+                }else if(index%4==1){
+                    dots[-index%4].classList.add('active');
+                }else if(index%4==2){
+                    dots[-index%4].classList.add('active');
+                }else {
+                    dots[-index%4].classList.add('active');
+                }
+
+            }
+
+            // hideButton()
+
+        }
+
+        function hideButton() {
+            prevBtn.style.display='inline-block';
+            nextBtn.style.display='inline-block';
+            if(index===0) {
+                prevBtn.style.display='none';
+            }
+            if (index===imgs.length-1) {
+                nextBtn.style.display='none';
+            }
+        }
+        navigateTo(0)
+
+    </script> -->
+
+<!-- 
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>같은 이름의 전역변수와 지역변수</h1>
+        
+        <script>
+            var num=10;
+            function globalNum(){
+                var num=20;
+                document.write("함수 내부에서 지역변수 num의 값은"+num+"입니다.<br>");
+            }
+            globalNum();
+
+        </script>
+    </body>
+    </html> -->

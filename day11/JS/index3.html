@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 썸네일 이미지 클릭시 화면에 크게 띄움 -->
+
+    <!-- <style>
+        #img01 {
+            width : 200px;
+            height : 200px;
+
+            object-fit: cover;
+            /* 이미지 크기 임의조정시 깨짐 방지 */
+        }
+        .layer {
+            position : fixed;
+            top : 0;
+            left : 0;
+            width : 100%;
+            height : 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: none;
+        }
+        .container {
+            position : fixed;
+            top : 50%;
+            left : 50%;
+            transform: translate(-50%,-50%);
+            width : 400px;
+        }
+        .container img {
+            /* 부모 콘테이너 안으로 딱 들어갈 수 있게 조절 */
+            width : 100%;
+        }
+    </style>
+
+    <img id="img01" src="../img/tulips.jpg" alt="">
+
+    <!-- 배경 -->
+    <!-- modal >> 따로 주어야 나중에 설정값 바꾸기 용이 -->
+    <!-- <div id="layer" class="layer"></div>
+
+    <!-- 디스플레이 이미지 -->
+    <!-- modal content -->
+    <!-- <div id="container" class="container">
+        <img src="" alt="" id="modal-img">
+    </div> --> 
+
+
+    <!-- <script>
+        var img01 = document.getElementById('img01');
+        var modalImg = document.getElementById('modal-img')
+        var container = document.getElementById('container')
+        var layer = document.getElementById('layer')
+
+        img01.addEventListener('click',function(){
+            //이미지 클릭시 레이어, 모달이미지가 차례로 뜰 수 있도록
+
+            //layer
+            layer.style.display='block';
+
+            //display image
+            modalImg.src = img01.src; //주소 직접 가져오기
+            container.style.display = 'block';
+
+        })
+        
+        //레이어 클릭시 이미지 사라지게 해보기
+        layer.addEventListener('click',function(){
+            layer.style.display = 'none';
+            container.style.display = 'none';
+        })
+
+        // 사진 클릭 시 사라지기 
+        container.addEventListener('click',function(){
+            layer.style.display = 'none';
+            modalImg.src = img01.src;
+            container.style.display = 'none';
+        })
+
+        // >> 반복되는 함수 대체하고싶은데... 집가서 해보기
+        function disappear() {
+            layer.style.display = 'none';
+            modalImg.src = img01.src;
+            container.style.display = 'none';
+        }
+
+        // 콘테이너 위치 relative로도 바꿔서 해보기 (css)
+
+    </script> -->
+
+    <!-- ------------------------------------------------------------------------------------- -->
+
+    <!-- 썸네일 정렬 -->
+
+    <!-- <style>
+        .thumbnail {
+            width : 100px;
+            height : 100px;
+            object-fit : cover;
+            opacity : 0.8;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+        .thumbnail:hover {
+            opacity : 1;
+        }
+
+        .layer {
+            position : fixed;
+            top : 0;
+            left : 0;
+            width : 100%;
+            height : 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: none;
+        }
+        .container {
+            position : fixed;
+            top : 50%;
+            left : 50%;
+            transform: translate(-50%,-50%);
+            width : 400px;
+            display : none;
+        }
+        .container img {
+            /* 부모 콘테이너 안으로 딱 들어갈 수 있게 조절 */
+            width : 100%;
+        }
+        .close-btn {
+            position : absolute;
+            color : #fff;
+            top : -50px; right : 0;
+            font-size: 40px;
+        }
+
+    </style>
+
+    <img src="../img/hot.jpg" alt="" class="thumbnail">
+    <img src="../img/tea1.jpg" alt="" class="thumbnail">
+    <img src="../img/tea2.jpg" alt="" class="thumbnail">
+
+    background layer (배경 레이어)-->
+    <!-- <div id="layer" class="layer"></div>
+
+     display image (디스플레이 이미지) -->
+    <!-- <div id="container" class="container">
+        <span id="close-btn" class="close-btn">&times;</span>
+        <img id="modal-img" src="" alt="">
+    </div> -->
+
+    <!-- <script>
+        var thumbnails = document.querySelectorAll('.thumbnail')
+        var modalImg = document.getElementById('modal-img')
+        var container = document.getElementById('container')
+        var layer = document.getElementById('layer')
+        var closeBtn = document.getElementById('close-btn')
+        // 클래스로 접근하려면 querySelector 로만 접근하기
+
+        thumbnails.forEach(function (thumbnail){
+            console.log(thumbnail)
+
+            thumbnail.addEventListener('click',function(){
+                // 방법 1
+                // modaiImg.scr = thumbnail.src;
+
+                //방법 2 getAttribute(attribute)
+                // modalImg.src = thumbnail.getAttribute('src');
+
+                //  방법 3 setAttribute(attribute, element attribute)
+                // 앞의 src를 뒤의 인자로 하겠다~~ 
+                modalImg.setAttribute('src', thumbnail.getAttribute('src'));
+
+                console.log(modalImg.src)
+
+                layer.style.display = 'block';
+                container.style.display = 'block';
+            })
+        })
+
+        layer.addEventListener('click',function(){
+            layer.style.display = 'none';
+            container.style.display = 'none';
+        })
+
+        //해결 ^^
+        closeBtn.addEventListener('click',function(){
+            layer.style.display = 'none';
+            container.style.display = 'none';
+        })
+
+    </script> -->
+
+    <!-- ------------------------------------------------------------------------------------- -->
+    
+    <!-- 여러 썸네일 이미지 중 메인 썸네일 이미지 클릭 -->
+
+    <!-- <style>
+        .thumbnail {
+            width : 100px;
+            height : 100px;
+            object-fit : cover;
+
+            opacity : 0.8;
+            transition: 0.5s;
+            cursor : pointer;
+        }
+
+        .thumbnail:hover{
+            opacity : 1;
+        }
+
+        .container img {
+            width : 400px;
+            height : 300px;
+            object-fit : cover;
+        }
+    </style>
+
+    <div class="container">
+        <img id = "display-image"src="" alt="" class="display-image">
+    </div>
+
+    <div class="">
+    <img src="../img/hot.jpg" alt="" class="thumbnail">
+    <img src="../img/tea1.jpg" alt="" class="thumbnail">
+    <img src="../img/tea2.jpg" alt="" class="thumbnail">
+    <img src="../img/cake1.jpg" alt="" class="thumbnail">
+
+    </div>
+
+    <script>
+        var thumbnails = document.querySelectorAll('.thumbnail');
+        var displayImage = document.getElementById('display-image');
+
+        thumbnails.forEach(function (thumbnail) {
+
+            // console.log(thumbnail)
+
+            // addEventListener (eventName, callbck)
+            // event를 callback의 인자로 넘겨준다
+            thumbnail.addEventListener('click',function(event){
+                // 해당 이벤트의 타겟이 누군지 출력
+                // console.log(event.target);
+
+                // displayImage.src = event.target.src;
+                getImage(event.target.src)
+
+            })
+        })
+
+        // 이미지 가져오는 함수 만들기
+        function getImage(src) {
+            displayImage.src = src;
+        }
+
+        //페이지 로드와 동시에 실행
+        // event : load, scroll, click, onkeyup, mouseover(=hover), drag and drop ...
+        // >> 사용자의 모든 행동
+        // addEventListener('load',function(e){
+        //     console.log(e)
+        //     alert()
+        // })
+
+        // 페이지 처음 시작시 첫번째 이미지가 크게 나오도록
+        getImage(thumbnails[0].src);
+
+    </script> -->
+
+ <!-- ------------------------------------------------------------------------------------- -->
+    
+    <!-- 버튼을 누르면 이미지가 넘어가는 화면 -->
+
+    <style>
+
+        .container {
+            /* border : 1px dashed; */
+            position : relative;
+        }
+
+        img {
+            width : 100%;
+            height : 300px;
+            object-fit: cover;
+        }
+        
+        button {
+            background-color: rgba(0,0,0,0.5);
+            color : #fff;
+            font-size: 20px;
+            border : none;
+            outline : 0; 
+            cursor: pointer;    
+        }
+        
+        .prev, .next {
+            position :absolute;
+            top : 50%;
+            padding : 10px;
+            /* transform: translate(0,-50%); */
+            transform: translateY(-50%);
+        }
+
+        .next {
+            right : 0;
+        }
+        .prev {
+            left : 0;
+        }
+        .dots{
+            text-align: center;
+        }
+        .dot {
+            width : 10px;
+            height : 10px;
+            background-color: #ddd;
+            border-radius: 50%;
+
+            display : inline-block;
+            /* inline은 width와 height를 설정할 수 없다.  */
+            /* 또한 위아래 padding과 margin을 설정할 수 없다 */
+
+        }
+        .active {
+            background-color: #888;
+        }
+
+
+
+    </style>
+
+    <div class="container">
+        <img src="../img/cake1.jpg" alt="">
+        <img src="../img/cakes.jpg" alt="">
+        <img src="../img/cake03.jpg" alt="">
+        
+        <div class="nav">
+            <button id="prev" class="prev" onclick="showImage(-1)">&#10094;</button>
+            <button id="next" class="next" onclick="showImage(1)">&#10095;</button>
+        </div>
+    </div>
+
+    <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+
+
+    <script>
+        var imgs = document.querySelectorAll('img');
+        var prev = document.getElementById('prev');
+        var next = document.getElementById('next');
+        var dots = document.querySelectorAll('.dot')
+
+        console.log(imgs) // 잘 연결됐나 확인
+        console.log(dots)
+
+
+        //함수 밖에서 정의해야함
+        // index 초기화 >> 새로고침하면 0으로 초기화됨
+        var index = 0;
+        function showImage(data) {
+            index += data;
+
+            // 모든 이미지 숨김
+            imgs.forEach(function(img){
+                img.style.display='none';
+            })
+
+            // 첫번째 이미지만 보임
+            imgs[index].style.display='block';
+
+            console.log(index)
+
+            //버튼 보이도록 초기화
+            prev.style.display='inline-block';
+            next.style.display='inline-block';
+
+            //조건에 맞으면 버튼이 사라짐
+            if(index===0) {
+                prev.style.display='none'
+            }
+            if(index===imgs.length-1) {
+                next.style.display='none';
+            }
+            // >>> 실행되는 순서도 중요하므로 코딩할때 고려해야함
+
+            dots.forEach(function(dot){
+                dot.classList.remove('active');
+            })
+            dots[index].classList.add('active');
+        }
+        showImage(index);
+
+    </script>
+
+
+</body>
+</html>

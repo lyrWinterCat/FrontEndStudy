@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        nav {
+            padding : 15px;
+            /* box-shadow: h/v/blur/spread/color/insert */
+            /* box-shadow: 수평/수직/흐림/퍼짐/색상/안쪽 */
+            box-shadow: 3px 0px 3px 3px #888;
+            background-color: #fff;
+        }
+        .padding-48 {
+            padding : 48px 0;
+        }
+        /* 자손선택자 :  그냥 한칸 띄는 것. ' ' */
+        /* 자식 선택자 : '>'*/
+        .project-image > div {
+            padding : 5px;
+        }
+        .member div {
+            padding : 5px;
+        }
+        .bg-black {
+            background-color: #000;
+            color : #fff;
+            padding : 5px;
+        }
+
+        button {
+            border : none;
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #888;
+        }
+
+    </style>
+</head>
+<body style="min-height : 2000px;">
+
+    <nav class="fixed-top float-container">
+        <a href=""><span>&nbsp;&nbsp;현대</span>자동차</a>
+        <div class="right hide-mobile">
+            <a href="">&nbsp;&nbsp;프로젝트</a>
+            <a href="">&nbsp;&nbsp;소개</a>
+            <a href="">&nbsp;&nbsp;연락하기</a>
+            <!-- &nbsp; : 띄어쓰기 기호 -->
+        </div>
+    </nav>
+
+    <main class="" style="max-width:1300px; margin:50px auto 0; padding : 0 15px;">
+
+        <div class="main-image relative">
+            <img src="../../img/project2/architect.jpeg" alt="">
+            <h1 class="bg-text"><span class="bg-black">현대</span><span class="hide-mobile">자동차</span></h1>
+        </div>
+
+        <h2 class="padding-48">프로젝트</h2>
+
+        <div class="project-image float-container">
+            <div class="left width-100 tablet-50 pc-25 relative">
+                <div class="relative">
+                    <img src="../../img/project2/house2.jpeg" alt="">
+                    <span class="project-name bg-black absolute">제네시스</span>
+                </div>
+            </div>
+            <div class="left width-100 tablet-50 pc-25 relative">
+                <div class="relative">
+                    <img src="../../img/project2/house3.jpeg" alt="">
+                    <span class="project-name bg-black absolute">제네시스</span>
+                </div>
+             </div>
+            <div class="left width-100 tablet-50 pc-25 relative">
+                <div class="relative">
+                    <img src="../../img/project2/house4.jpeg" alt="">
+                    <span class="project-name bg-black absolute">제네시스</span>
+                </div>
+            </div>
+            <div class="left width-100 tablet-50 pc-25 relative">
+                <div class="relative">
+                    <img src="../../img/project2/house5.jpeg" alt="">
+                    <span class="project-name bg-black absolute">제네시스</span>
+                </div>
+            </div>
+            <!-- min-width는 점점 커지는 방향으로 가야 함 -->
+            <!-- width : 100-501-701 -->
+        </div>
+
+        <div class="project-image float-container">
+            <div class="left width-100 tablet-50 pc-25 relative">
+                <div class="relative">
+                    <img src="../../img/project2/house5.jpeg" alt="">
+                    <span class="project-name bg-black absolute">제네시스</span>
+                </div>
+            </div>
+            <div class="left width-100 tablet-50 pc-25 relative">
+                <div class="relative">
+                    <img src="../../img/project2/house4.jpeg" alt="">
+                    <span class="project-name bg-black absolute">제네시스</span>
+                </div>
+            </div>
+            <div class="left width-100 tablet-50 pc-25 relative">
+                <div class="relative">
+                    <img src="../../img/project2/house3.jpeg" alt="">
+                    <span class="project-name bg-black absolute">제네시스</span>
+                </div>
+            </div>
+            <div class="left width-100 tablet-50 pc-25 relative">
+                <div class="relative">
+                    <img src="../../img/project2/house2.jpeg" alt="">
+                    <span class="project-name bg-black absolute">제네시스</span>
+                </div>
+            </div>
+            <!-- ctrl + f 에서 화살표 눌러서 replace 기능으로 한번에 수정 가능 -->
+        </div>
+
+        <h2 class="padding-48">소개</h2>
+
+        <div class="member flaot-container">
+            <div class="left width-100 tablet-50 pc-25">
+                <img src="../../img/project2/team1.jpeg" alt="">
+                <h2>제네시스</h2>
+                <p>CEO & 설립자</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit deleniti similique natus unde labore consequuntur voluptate soluta suscipit aliquid voluptatibus corporis enim a exercitationem, consequatur magnam repellat quae ad. Hic?</p>
+                <button class="width-100">연락하기</button>
+            </div>
+            <div class="left width-100 table-50 pc-25">
+                <img src="../../img/project2/team2.jpeg" alt="">
+                <h2>아반떼</h2>
+                <p>마케팅</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit deleniti similique natus unde labore consequuntur voluptate soluta suscipit aliquid voluptatibus corporis enim a exercitationem, consequatur magnam repellat quae ad. Hic?</p>
+                <button class="width-100">연락하기</button>
+            </div>
+            <div class="left width-100 table-50 pc-25">
+                <img src="../../img/project2/team3.jpeg" alt="">
+                <h2>코나</h2>
+                <p>마케팅</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit deleniti similique natus unde labore consequuntur voluptate soluta suscipit aliquid voluptatibus corporis enim a exercitationem, consequatur magnam repellat quae ad. Hic?</p>
+                <button class="width-100">연락하기</button>
+            </div>
+            <div class="left width-100 table-50 pc-25">
+                <img src="../../img/project2/team4.jpeg" alt="">
+                <h2>캐스퍼</h2>
+                <p>마케팅</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit deleniti similique natus unde labore consequuntur voluptate soluta suscipit aliquid voluptatibus corporis enim a exercitationem, consequatur magnam repellat quae ad. Hic?</p>
+                <button class="width-100">연락하기</button>
+                </div>
+        </div>
+        
+        <h2 class="padding-48">연락하기</h2>
+        <form action="">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nulla neque numquam fugiat rerum eum consequuntur laudantium, vero dolorem unde repellat voluptate quos! Mollitia corrupti earum commodi. Alias, ab eum?</p>
+            <p>
+                <input class="width-100" type="text" placeholder="이름">
+            </p>
+            <p>
+                <input class="width-100" type="text" placeholder="이메일">
+            </p>
+            <p>
+                <input class="width-100" type="text" placeholder="제목">
+            </p>
+            <p>
+                <input class="width-100" type="text" placeholder="메세지">
+            </p>
+            <p>
+                <button class="">보내기</button>
+            </p>
+        </form>
+
+    </main>
+    
+    <footer class="bg-black text-center" style="padding : 25px 0; margin-top : 50px;">
+        2022 현대자동차
+    </footer>
+</body>
+</html>
